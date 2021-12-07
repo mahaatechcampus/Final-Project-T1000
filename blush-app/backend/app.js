@@ -2,6 +2,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const userRoute = require('./routes/user');
+const authRoute = require('./routes/auth');
 const app = express();
 const port = 8080 ;
 
@@ -12,6 +13,7 @@ mongoose.connect("mongodb+srv://mahadb:maha1312@cluster0.ghbvs.mongodb.net/blush
 
 //==== Routes ====//
 app.use(express.json()); // most above routes
+app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
 
 
