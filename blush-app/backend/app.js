@@ -1,9 +1,13 @@
 //==== Requires ==== //
 const express = require('express');
 const mongoose = require('mongoose');
-const userRoute = require('./routes/user');
 const authRoute = require('./routes/auth');
+const userRoute = require('./routes/user');
 const productRoute = require('./routes/product');
+const orderRoute = require('./routes/order');
+const cartRoute = require('./routes/cart');
+
+
 const app = express();
 const port = 8080 ;
 
@@ -17,6 +21,8 @@ app.use(express.json({strict: false}));
 app.use("/api/auth", authRoute);// most above routes
 app.use("/api/users", userRoute);
 app.use("/api/products", productRoute);
+app.use("/api/carts", cartRoute);
+app.use("/api/orders", orderRoute);
 
 
 
