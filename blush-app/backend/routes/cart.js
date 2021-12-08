@@ -38,7 +38,7 @@ router.delete("/:id",verifyTokenAndAuthorization, async (req,res,) =>{
 });  
 
 // ==== GET User Cart ====// 
-router.get("/find/:userId", async (req,res,) =>{ // userId
+router.get("/find/:userId",verifyTokenAndAuthorization, async (req,res,) =>{ // userId
     try {
         const cart = await Cart.findOne({userId: req.params.userId}); // findOne beacose every user have a one cart
         res.status(200).json(cart)
