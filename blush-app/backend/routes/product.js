@@ -15,6 +15,27 @@ router.post('/',verifyTokenAndAdmin, async (req, res)=>{
     }
 });
 
+//==== Updating ====// 
+router.put("/:id",verifyTokenAndAdmin, async (req,res) => {
+    try {
+        const updatedProduct = await Product.findByIdAndUpdate(req.params.id,{
+            $set:req.body // everything in a body will set it again
+         },{new:true}); // return the new apdate
+        res.status(200).json(updatedProduct);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+    });
+//==== Deleting ====// 
+router.delete("/:id",verifyTokenAndAuthorization, async (req,res,) =>{
+    try {
+        await Product.findByIdAndDelete(req.params.id);
+        res.status(200).json("Product has been deleted ...")
+    } catch (error) {
+        res.status(500).json(error)
+    }
+});    
+
 // ==== GET Product BY ID ====// 
 router.get("/find/:id", async (req,res,) =>{
     try {

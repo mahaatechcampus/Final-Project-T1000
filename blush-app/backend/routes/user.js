@@ -4,7 +4,7 @@ const CryptoJS = require("crypto-js");
 const jwt = require("jsonwebtoken");
 const {verifyToken, verifyTokenAndAuthorization,verifyTokenAndAdmin} = require("./verifyToken");
 
-//==== Ubdating ====// << second argument "midlware" to verify WebToken and get Authentecation
+//==== Updating ====// << second argument "midlware" to verify WebToken and get Authentecation
 router.put("/:id",verifyTokenAndAuthorization, async (req,res) => {
 // check if update user password will encrypt agin
 if (req.body.password ){
