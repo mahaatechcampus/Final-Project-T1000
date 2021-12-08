@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const userRoute = require('./routes/user');
 const authRoute = require('./routes/auth');
+const productRoute = require('./routes/product');
 const app = express();
 const port = 8080 ;
 
@@ -12,9 +13,11 @@ mongoose.connect("mongodb+srv://mahadb:maha1312@cluster0.ghbvs.mongodb.net/blush
 .catch((error)=> console.log(error)); // if connect fails
 
 //==== Routes ====//
-app.use(express.json()); // most above routes
-app.use("/api/auth", authRoute);
+app.use(express.json({strict: false})); 
+app.use("/api/auth", authRoute);// most above routes
 app.use("/api/users", userRoute);
+app.use("/api/products", productRoute);
+
 
 
 //==== Port listen ====//
