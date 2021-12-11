@@ -59,10 +59,10 @@ function Navbar() {
 
 
 
-        {/* botoom Navbar */}
+        {/* bottom Navbar */}
         <div className="bg-color1">
             <div className="container flex h-10">
-                <div className="flex items-center justify-between flex-grow pl-12">
+                <div className="flex items-center justify-center flex-grow ">
                     <div className="flex items-center space-x-6 capitalize">
                         <Link to="" className="text-color11 hover:text-color3 transition" >Lip</Link>
                         <Link to="" className="text-color11 hover:text-color3 transition" >Eye</Link>
