@@ -1,11 +1,12 @@
 import React from 'react';
 import {Link} from "react-router-dom";
-
+import BrandImgs from './BrandImgs';
+import NewArrival from './NewArrival';
 function Header() {
     return (
         <>
         {/* header background */}
-        <div className="bg-cover bg-no-repeat bg-center py-36" style={{backgroundImage:"url(https://images.unsplash.com/photo-1512207855369-643452a63d46?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1383&q=80)" }}>
+        <div className="bg-cover bg-no-repeat bg-center py-36" style={{backgroundImage:"url(https://images.unsplash.com/photo-1531646317777-0619c7c5d1d3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80)" }}>
             <div className="container">
                 <h1 className="text-6xl text-color11 font-medium mb-4 capitalize">Best Collection ... </h1>
                 <p>
@@ -57,31 +58,31 @@ function Header() {
                 </div>
             </div>
         </div>
+        {/* Brands imgs */}
+        <BrandImgs/>
+
 
         {/* Categories */}
         <div className="container py-16">
+            <h2 className="text-3xl font-medium text-color5 uppercase mb-6">Shop By Category</h2>
             <div className="grid grid-cols-3 gap-3">
                 {/* single category */}
             <div className="relative rounded-md overflow-hidden group">
-                <img src="https://images.unsplash.com/photo-1583241800698-e8ab01830a07?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" className="w-full  h-full" alt="Eye"/>
-                <Link to="" className="absolute inset-0 bg-color6 bg-opacity-40 flex items-center justify-center text-4xl text-color11 font-roboto font-medium group-hover:bg-opacity-60 transition">Eye</Link>
+                <img src="https://a.namshicdn.com/cms/large/women/20210113/makeup/module_03.jpg" className="w-full  " alt="Eye"/>
+                <Link to="" className="absolute inset-0 bg-color6 bg-opacity-30 flex items-center justify-center text-4xl text-color11 font-roboto font-medium group-hover:bg-opacity-60 transition">Eye</Link>
             </div>  
                  {/* single category */}
-                 <div className="relative rounded-md overflow-hidden group">
-                <img src="https://images.unsplash.com/photo-1531646317777-0619c7c5d1d3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" className="w-full h-full" alt="Eye"/>
-                <Link to="" className="absolute inset-0 bg-color6 bg-opacity-40 flex items-center justify-center text-4xl text-color11 font-roboto font-medium group-hover:bg-opacity-60 transition">Face</Link>
+                <div className="relative rounded-md overflow-hidden group">
+                <img src="https://a.namshicdn.com/cms/large/women/20210113/makeup/module_04.jpg" className="w-full " alt="Eye"/>
+                <Link to="" className="absolute inset-0 bg-color6 bg-opacity-30 flex items-center justify-center text-4xl text-color11 font-roboto font-medium group-hover:bg-opacity-60 transition">Face</Link>
             </div> 
                  {/* single category */}
-                 <div className="relative rounded-md overflow-hidden group">
-                <img src="https://images.unsplash.com/photo-1625093742435-6fa192b6fb10?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1489&q=80" className="w-full h-full" alt="Eye"/>
-                <Link to="" className="absolute inset-0 bg-color6 bg-opacity-40 flex items-center justify-center text-4xl text-color11 font-roboto font-medium group-hover:bg-opacity-60 transition">Lip</Link>
+                <div className="relative rounded-md overflow-hidden group">
+                <img src="https://a.namshicdn.com/cms/large/women/20210113/makeup/module_02.jpg" className="w-full " alt="Eye"/>
+                <Link to="" className="absolute inset-0 bg-color6 bg-opacity-30 flex items-center justify-center text-4xl text-color11 font-roboto font-medium group-hover:bg-opacity-60 transition">Lip</Link>
             </div> 
-
             </div>
-          
-
         </div>
-
         </>
     )
 }
