@@ -4,7 +4,7 @@
 ​
 # Quick Compo
 ​
-<img src="http://localhost:3000/Blush%20logo.png" alt="minilogo" style="zoom:75%;" />
+<img src="https://ibb.co/jZp3DJY" alt="minilogo" style="zoom:75%;" />
 ​
 ## Description
 ​
@@ -212,7 +212,8 @@ The url to your presentation slides
 ​
 [Figma Link](https://www.figma.com/proto/N3BbSY8P5ZtCmOcmnkjvO4/Blush-Store?node-id=2%3A3&scaling=min-zoom&page-id=0%3A1)
 ​
-Blush's Palette: https://ibb.co/prhDFMG
+Blush's Palette: <img src="https://ibb.co/prhDFMG" alt="minilogo" style="zoom:75%;" />
+ 
 
 Blush's Fonts:   poppins: "'poppins',sans-serif",
                  roboto: "'Roboto', sans-serif"
