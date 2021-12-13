@@ -34,13 +34,13 @@
 - Order details page
 
 ## Tech Stack 💻
-React.js
-Node.js
-Express.js
-MongoDB Atlas
-Stripe - payment
-React TailwindCss
-Redux
+- React.js
+- Node.js
+- Express.js
+- MongoDB Atlas
+- Stripe - payment
+- React TailwindCss
+- Redux
 
 ​
 # Client / Frontend
