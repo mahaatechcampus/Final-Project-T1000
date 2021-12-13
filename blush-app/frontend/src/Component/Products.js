@@ -1,14 +1,16 @@
 import { useState, useEffect} from "react";
 import {Link} from "react-router-dom";
-
 import axios from "axios";
 
-function Products(category,filters,sort) {
+function Products({category,filters,sort}) {
 
     const [products,setProducts] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
+    const [sortredProducts, setSortredProducts] = useState([]);
 
-    console.log(category.category)
+
+    console.log(filters)
+
     useEffect(() =>{ 
     const getProducts = async() =>{
             try {
@@ -24,6 +26,35 @@ function Products(category,filters,sort) {
 
     },[category]) //lip, eye , face
 
+    //fetch by category & filter 
+    // useEffect(() => {
+    //     category && setFilteredProducts(
+    //         products.filter((item) =>
+    //         Object.entries(filters).every(([key, value]) =>
+    //         item[key].includes(value)
+    //         )    
+    //     )
+    //     );
+
+    // },[products,category,filters ]) ; 
+
+    useEffect(()=>{ 
+        if(sort === "newest"){
+            setSortredProducts((prev)=>
+            products.sort((a,b)=> a.createdAt - b.createdAt)
+            );
+           } else  if(sort === "asc"){
+            setSortredProducts((prev)=>
+            products.sort((a,b)=> a.price - b.price)
+            );
+           } else { 
+            setSortredProducts((prev)=>
+            products.sort((a,b)=> b.price - a.price)
+            );
+        }
+
+    },[sort]);
+
 
 
     return (
@@ -36,7 +67,7 @@ function Products(category,filters,sort) {
                 <div className="relative" >
                     <img src={item.image_key} alt="nyx product"className="w-full" />
                     <div className="absolute inset-0 bg-color6 bg-opacity-40 flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition">
-                    <Link to="" className="text-color11  text-lg rounded  bg-color1 flex items-center justify-center hover:bg-color12 transition">
+                    <Link to={`/product/${item._id}`} className="text-color11  text-lg rounded  bg-color1 flex items-center justify-center hover:bg-color12 transition">
                     <svg xmlns="http://www.w3.org/2000/svg" className=" w-8 h-7 " fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                     </svg></Link>
@@ -52,7 +83,7 @@ function Products(category,filters,sort) {
                 {/* Product content */}
         
                 <div className ="pt-4 pb-3 px-4 ">
-                    <Link to ="" >
+                    <Link to ={`/product/${item._id}`}>
                         <h4 className="font-medium text-l mb-2 text-color6 hover:text-color1 transition">{item.name} </h4>
                     </Link>
                     <div className="flex items-baseline mb-1 space-x-2 font-roboto">
@@ -82,6 +113,7 @@ function Products(category,filters,sort) {
             Add To Cart
             </Link>
             </div>
+           
 
 ))}
         </div>

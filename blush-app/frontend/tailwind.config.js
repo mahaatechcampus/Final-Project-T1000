@@ -34,6 +34,7 @@ module.exports = {
       "color11":"#FFFFFF",
       "color12":"#C6C6C6",
       "color13":"#E6D91E",
+      "color14":"#888888"
   },
   variants: {
     extend: {}

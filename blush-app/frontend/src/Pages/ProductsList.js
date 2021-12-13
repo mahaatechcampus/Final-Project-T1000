@@ -98,12 +98,12 @@ export default function ProductsList() {
                
 
                 <div className=" flex gap-2 ml-auto">
-                <select name="brand"onChange={handleFilters} className="w-44 justify-center  text-sm text-color4 px-4 py-3  border-color1 shadow-sm rounded focus:ring-color1 focus:border-color1">
+                <select name="brand" onChange={handleFilters} className="w-44 justify-center  text-sm text-color4 px-4 py-3  border-color1 shadow-sm rounded focus:ring-color1 focus:border-color1">
                    <option disabled>Brand</option>
-                    <option>KIKO</option>
-                    <option>Benefit</option>
-                    <option>NYX</option>
-                    <option>MAC</option>
+                    <option value="kiko">KIKO</option>
+                    <option value="benefit">Benefit</option>
+                    <option value="nyx">NYX</option>
+                    <option value="mac">MAC</option>
                 </select> 
                 </div>
                </div>

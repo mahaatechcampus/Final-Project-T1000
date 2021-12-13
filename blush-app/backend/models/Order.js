@@ -11,6 +11,6 @@ const OrderSchema = new mongoose.Schema({
         amount: { type: Number, required: true},
         address: { type: Object, required: true}, // type object to store all address info. from user
         status: { type: String, default: 'Panding'} //panding , onway ,....
-});
+},{ timestamps: true });
 
 module.exports = mongoose.model("Order", OrderSchema);
