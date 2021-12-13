@@ -1,15 +1,15 @@
 import React from 'react'
-import Navbar from '../Component/Navbar'
 import Header from '../Component/Header';
+import CategoryItem from '../Component/CategoryItem';
+import BrandImgs from '../Component/BrandImgs';
 import NewArrival from '../Component/NewArrival';
 function Home() {
     return (
         <div>
-            <Navbar/>
             <Header/>
+            <BrandImgs/>
+            <CategoryItem/>
             <NewArrival/>
-            
-           
         </div>
     )
 }
