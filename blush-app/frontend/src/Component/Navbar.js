@@ -67,7 +67,7 @@ function Navbar() {
                         <Link to="/products/eye" className="text-color11 hover:text-color3 transition" >Eye</Link>
                         <Link to="/products/face" className="text-color11 hover:text-color3 transition" >Face</Link>
                         <Link to="/products/lip" className="text-color11 hover:text-color3 transition" >Lip</Link>
-                        {/* <Link to="" className="text-color11 hover:text-color3 transition" >New</Link> */}
+                        {/* <Link to="" className="text-color11 hover:text-color3 transition" >Brands</Link>  */}
                     </div>
                 </div>
             </div>
