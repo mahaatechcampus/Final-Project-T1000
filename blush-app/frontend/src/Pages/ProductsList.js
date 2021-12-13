@@ -86,14 +86,14 @@ export default function ProductsList() {
             {/* products */}
             <div className="col-span-3">
                 {/* sorting */}
-              
+            
                 
                <div className="flex items-center mb-4">
                <select className="w-44 text-sm justify-center text-color4 px-4 py-3  border-color12 shadow-sm rounded focus:ring-color1 focus:border-color1">
-               <option disabled>Sort</option>
-                    <option>Newest</option>
-                    <option>Asc</option>
-                    <option>Desc</option>
+               <option onChange={(e)=> setSort(e.target.value)} disabled>Sort</option>
+                    <option value="newst">Newest</option>
+                    <option value="asc">Price (Low)</option>
+                    <option value="desc">Price (High)</option>
                 </select> 
                
 
