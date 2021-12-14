@@ -1,7 +1,13 @@
 import React from 'react'
 import {Link} from "react-router-dom";
+import {useSelector} from "react-redux"
+
+
 
 function Navbar() {
+
+const quantity =  useSelector(state => state.cart.quantity)
+
     return (
         <>
         {/* header navbar */}
@@ -42,7 +48,7 @@ function Navbar() {
                     </svg></div>
 
                     <div className="text-xs leading-3">Cart</div>
-                    <span className=" absolute right-0 left-6 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-color10 text-color11 text-xs">9</span>
+                    <span className=" absolute right-0 left-6 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-color10 text-color11 text-xs">{quantity}</span>
                     </Link>
 
                     <Link to="" className="text-center text-color12 hover:text-color1 transition relative">
