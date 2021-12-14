@@ -8,11 +8,12 @@ function Product() {
     const {id} = useParams();
     console.log(id)
     const [product,setProduct] = useState({});
+    const [quantity,setQuantity] = useState(1);
+
     const i = 0;
     console.log(product)
 
     useEffect(() =>{
-
     const getProduct = async () => {
             try {
                 const res = await axios.get("http://localhost:8080/api/products/find/" + id)
@@ -22,6 +23,16 @@ function Product() {
         }
         getProduct();
     },[id])
+
+    const handleQuantity = (type) =>{
+        if(type === "dec"){
+            quantity > 1 && setQuantity(quantity - 1)
+        }
+        else{
+            setQuantity(quantity + 1)
+        }
+    }
+
 
     if (!Object.keys(product).length) return <div>Loading</div>;
 
@@ -85,9 +96,9 @@ function Product() {
                     <div className=" mt-4">
                         <h3 className="text-sm text-color4 mb-1">Quantity:</h3>
                         <div className="flex border border-color12 text-color12 divide-x divide-color12 w-max">
-                            <div className="h-8 w-8 text-xl flex items-center justify-center cursor-pointer select-none">-</div>
-                            <div className="h-8 w-8 text-xl flex items-center justify-center text-color4">2</div>
-                            <div className="h-8 w-8 text-xl flex items-center justify-center cursor-pointer select-none">+</div>
+                            <div onClick={()=> handleQuantity("dec")} className="h-8 w-8 text-xl flex items-center justify-center cursor-pointer select-none">-</div>
+                            <div className="h-8 w-8 text-xl flex items-center justify-center text-color4">{quantity}</div>
+                            <div onClick={()=> handleQuantity("inc")} className="h-8 w-8 text-xl flex items-center justify-center cursor-pointer select-none">+</div>
                         </div>
                     </div>
 
