@@ -66,7 +66,7 @@ function Products({category,filters,sort}) {
                 {/* product image */}
                 <div className="relative" >
                     <img src={item.image_key} alt="nyx product"className="w-full" />
-                    <div className="absolute inset-0 bg-color6 bg-opacity-40 flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition">
+                    <div className="absolute inset-0 bg-color3 bg-opacity-40 flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition">
                     <Link to={`/product/${item._id}`} className="text-color11  text-lg rounded  bg-color1 flex items-center justify-center hover:bg-color12 transition">
                     <svg xmlns="http://www.w3.org/2000/svg" className=" w-8 h-7 " fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -84,7 +84,7 @@ function Products({category,filters,sort}) {
         
                 <div className ="pt-4 pb-3 px-4 ">
                     <Link to ={`/product/${item._id}`}>
-                        <h4 className="font-medium text-l mb-2 text-color6 hover:text-color1 transition">{item.name} </h4>
+                        <h4 className="font-medium text-l mb-2 text-color3 hover:text-color1 transition">{item.name} </h4>
                     </Link>
                     <div className="flex items-baseline mb-1 space-x-2 font-roboto">
                         <p className="text-xl text-color10 font-semibold">{item.price} SAR</p>

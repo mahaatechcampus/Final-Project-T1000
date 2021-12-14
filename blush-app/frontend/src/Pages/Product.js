@@ -60,7 +60,7 @@ function Product() {
 
             {/* product content */}
             <div>
-                <h2 className="text-2xl text-color6 font-medium mb-2 ">{product.name}</h2>
+                <h2 className="text-2xl text-color3 font-medium mb-2 ">{product.name}</h2>
                 <div className="flex items-center mb-4">
                         <div className="flex gap-1 text-sm text-color13">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" >
@@ -156,7 +156,7 @@ function Product() {
                     {/* product image */}
                     <div className="relative" >
                         <img src="https://pa.namshicdn.com/product/A9/18335W/v1/1-web-desktop-list.webp" alt="nyx product"className="w-full" />
-                        <div className="absolute inset-0 bg-color6 bg-opacity-40 flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition">
+                        <div className="absolute inset-0 bg-color3 bg-opacity-40 flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition">
                         <Link to="" className="text-color11  text-lg rounded  bg-color1 flex items-center justify-center hover:bg-color12 transition">
                         <svg xmlns="http://www.w3.org/2000/svg" className=" w-8 h-7 " fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -174,7 +174,7 @@ function Product() {
             
                     <div className ="pt-4 pb-3 px-4">
                         <Link to ="" >
-                            <h4 className=" font-medium text-xl mb-2 text-color6 hover:text-color1 transition"> NYX | Mineral Finishing Powder - Light/Medium </h4>
+                            <h4 className=" font-medium text-xl mb-2 text-color3 hover:text-color1 transition"> NYX | Mineral Finishing Powder - Light/Medium </h4>
                         </Link>
                         <div className="flex items-baseline mb-1 space-x-2 font-roboto">
                             <p className="text-xl text-color10 font-semibold">64 SAR</p>
@@ -209,7 +209,7 @@ function Product() {
                     {/* product image */}
                     <div className="relative" >
                         <img src="https://pa.namshicdn.com/product/A8/79326W/v1/1-web-desktop-list.webp" alt="nyx product"className="w-full" />
-                        <div className="absolute inset-0 bg-color6 bg-opacity-40 flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition">
+                        <div className="absolute inset-0 bg-color3 bg-opacity-40 flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition">
                         <Link to="" className="text-color11  text-lg rounded  bg-color1 flex items-center justify-center hover:bg-color12 transition">
                         <svg xmlns="http://www.w3.org/2000/svg" className=" w-8 h-7 " fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -227,7 +227,7 @@ function Product() {
             
                     <div className ="pt-4 pb-3 px-4">
                         <Link to ="" >
-                            <h4 className=" font-medium text-xl mb-2 text-color6 hover:text-color1 transition"> KIKO | Flawless Fusion Bronzer Powder 05 </h4>
+                            <h4 className=" font-medium text-xl mb-2 text-color3 hover:text-color1 transition"> KIKO | Flawless Fusion Bronzer Powder 05 </h4>
                         </Link>
                         <div className="flex items-baseline mb-1 space-x-2 font-roboto">
                             <p className="text-xl text-color10 font-semibold">76 SAR</p>
@@ -262,7 +262,7 @@ function Product() {
                     {/* product image */}
                     <div className="relative" >
                         <img src="https://pa.namshicdn.com/product/32/0192/v5/1-web-desktop-list.webp" alt="nyx product"className="w-full" />
-                        <div className="absolute inset-0 bg-color6 bg-opacity-40 flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition">
+                        <div className="absolute inset-0 bg-color3 bg-opacity-40 flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition">
                         <Link to="" className="text-color11  text-lg rounded  bg-color1 flex items-center justify-center hover:bg-color12 transition">
                         <svg xmlns="http://www.w3.org/2000/svg" className=" w-8 h-7 " fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -280,7 +280,7 @@ function Product() {
             
                     <div className ="pt-4 pb-3 px-4">
                         <Link to ="" >
-                            <h4 className=" font-medium text-xl mb-2 text-color6 hover:text-color1 transition"> BENEFIT | Roller Lash Eye Mascara </h4>
+                            <h4 className=" font-medium text-xl mb-2 text-color3 hover:text-color1 transition"> BENEFIT | Roller Lash Eye Mascara </h4>
                         </Link>
                         <div className="flex items-baseline mb-1 space-x-2 font-roboto">
                             <p className="text-xl text-color10 font-semibold">146 SAR</p>
@@ -316,7 +316,7 @@ function Product() {
                     {/* product image */}
                     <div className="relative" >
                         <img src="https://pa.namshicdn.com/product/11/0192/v6/1-web-desktop-list.webp" alt="nyx product"className="w-full" />
-                        <div className="absolute inset-0 bg-color6 bg-opacity-40 flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition">
+                        <div className="absolute inset-0 bg-color3 bg-opacity-40 flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition">
                         <Link to="" className="text-color11  text-lg rounded  bg-color1 flex items-center justify-center hover:bg-color12 transition">
                         <svg xmlns="http://www.w3.org/2000/svg" className=" w-8 h-7 " fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -334,7 +334,7 @@ function Product() {
             
                     <div className ="pt-4 pb-3 px-4">
                         <Link to ="" >
-                            <h4 className=" font-medium text-xl mb-2 text-color6 hover:text-color1 transition"> BENEFIT | Benetint Cheek & Lip Stain </h4>
+                            <h4 className=" font-medium text-xl mb-2 text-color3 hover:text-color1 transition"> BENEFIT | Benetint Cheek & Lip Stain </h4>
                         </Link>
                         <div className="flex items-baseline mb-1 space-x-2 font-roboto">
                             <p className="text-xl text-color10 font-semibold">175  SAR</p>
