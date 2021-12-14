@@ -25,7 +25,7 @@ function Pay() {
                 amount: 500
             });
             console.log(res.data);
-            navigate("/success")
+            navigate("/success",{data:res.data})
             // history.push('/success');
             } catch (error) {
                 console.log(error)

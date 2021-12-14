@@ -1,18 +1,39 @@
-import React ,{useState} from 'react';
+import React ,{useState, useEffect} from 'react';
 import {Link} from "react-router-dom";
 import {useSelector,useDispatch} from "react-redux";
 import {removeProduct} from "../redux/cartRedux";
 import StripeCheckout from "react-stripe-checkout";
+import axios from "axios";
+import { useNavigate } from 'react-router';
+
 
 function Cart() {
     const KEY = 'pk_test_51K4QRoFYQSGZ6LgGFutNv3mcj4mNmIdz9nRX1v74QY1pY2quazCAe4NcurFP5vqrgb6pL6ztGZI00U2EXRvEGzie00Hs063D2O';
     const cart = useSelector(state => state.cart);
     const [stripeToken, setStripeToken] = useState(null)
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+
 
     const onToken = (token)=>{
         setStripeToken(token);
     };
+
+    useEffect(()=>{
+        const makeRequest = async () => {
+             try {
+                const res = await axios.post("http://localhost:8080/api/checkout/payment",{
+                    tokenId:stripeToken.id,
+                    amount: (cart.total*3.75)*100,  
+                });
+                navigate("/success", {state: {
+                stripeData: res.data,
+                products: cart, }});
+
+                } catch (error) {}
+        }
+        stripeToken && makeRequest();
+    },[stripeToken,cart.total,navigate])
 
 
     const handleQuantity = (type,quantity) => {
