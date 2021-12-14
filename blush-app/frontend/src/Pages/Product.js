@@ -49,7 +49,7 @@ function Product() {
         <div className="container grid grid-cols-2 gap-6 pt-20 ">
             {/* product img */}
             <div>
-            <img src={product.image_key}  className="w-full h-4/5" alt=""/>
+            <img src={product.image_key}  className="w-full h-4/5 rounded-md " alt=""/>
             {/* <div className="grid grid-cols-5 gap-4 mt-4 ">
             <img src={product.image_key}  className="w-full cursor-pointer border border-color10" alt=""/>
             <img src={product.image_key}  className="w-full cursor-pointer border " alt=""/>
