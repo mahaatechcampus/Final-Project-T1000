@@ -1,6 +1,5 @@
 import {BrowserRouter as Router,Routes,Route} from "react-router-dom";
 import Navbar from './Component/Navbar'
-import Pay from './Component/Pay'
 import Success from './Component/Success'
 import Home from "./Pages/Home";
 import ProductsList from "./Pages/ProductsList"
@@ -23,7 +22,6 @@ function App() {
         <Route path="/cart" element=  {<Cart/>} />
         <Route path="/login" element=  {<Login/>} />
         <Route path="/register" element=  {<Register/>} />
-        <Route path="/pay" element=  {<Pay/>} />
         <Route path="/success" element= {<Success/>} />
       </Routes>
     </Router>
