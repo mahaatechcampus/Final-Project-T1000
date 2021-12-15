@@ -1,13 +1,23 @@
 import React from 'react'
 import {Link} from "react-router-dom";
-import {useSelector} from "react-redux"
+import {useSelector,useDispatch} from "react-redux"
+import { useNavigate } from 'react-router';
+import { logoutuser } from '../redux/userRedux';
 
 
 
 function Navbar() {
 
 const quantity =  useSelector(state => state.cart.quantity)
+const user = useSelector((state) => state.user.currentUser);
+const dispatch = useDispatch();
+const navigate = useNavigate();
 
+const handleClick = ()=>{
+    dispatch(
+    logoutuser()
+    )
+};
     return (
         <>
         {/* header navbar */}
@@ -51,14 +61,28 @@ const quantity =  useSelector(state => state.cart.quantity)
                     <span className=" absolute right-0 left-6 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-color10 text-color11 text-xs">{quantity}</span>
                     </Link>
 
-                    <Link to="/login" className="text-center text-color12 hover:text-color1 transition relative">
-                    <div className="text-2xl">
+                { user ? <>
+                {/* logout */}
+                    <Link to=""  onClick={()=> handleClick()} className="text-center text-color12 hover:text-color1 transition relative" >
+                    <div  className="text-2xl">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-2xl ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                    </svg>
+                    </div>
+                    <div className="text-xs leading-3 text-center" >Logout</div>
+                    </Link>
+                    </>
+                
+                    :<Link to="/login" className="text-center text-color12 hover:text-color1 transition relative">
+                    <div className="text-2xl">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-2xl text-center" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg></div>
 
-                    <div className="text-xs leading-3 text-center">Account</div>
+                    <div className="text-xs leading-3 text-center">Login</div>
                     </Link>
+                    }
+
                 </div>
             </div>
         </div>
