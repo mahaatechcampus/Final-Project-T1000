@@ -17,7 +17,7 @@ function Login() {
     const user = useSelector((state) => state.user.currentUser);
     const navigate = useNavigate();
     user && navigate('/') 
-    
+
     return (
     <div>
     <div className="lg:flex">
