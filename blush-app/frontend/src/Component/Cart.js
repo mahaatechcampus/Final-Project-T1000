@@ -10,8 +10,8 @@ import { useNavigate } from 'react-router';
 function Cart() {
     const KEY = 'pk_test_51K4QRoFYQSGZ6LgGFutNv3mcj4mNmIdz9nRX1v74QY1pY2quazCAe4NcurFP5vqrgb6pL6ztGZI00U2EXRvEGzie00Hs063D2O';
     const cart = useSelector(state => state.cart);
+    console.log(cart)
     const [stripeToken, setStripeToken] = useState(null)
-    const dispatch = useDispatch();
     const navigate = useNavigate();
 
 
@@ -21,7 +21,7 @@ function Cart() {
 
     useEffect(()=>{
         const makeRequest = async () => {
-             try {
+            try {
                 const res = await axios.post("http://localhost:8080/api/checkout/payment",{
                     tokenId:stripeToken.id,
                     amount: (cart.total*3.75)*100,  
@@ -45,11 +45,6 @@ function Cart() {
             quantity -=1;
         }
     }
-    // const handleRemove = (product,productQuantity,id)=>{
-    //     dispatch(
-    //         removeProduct({...product,productQuantity,id,price:product.price * productQuantity})
-    //     )
-    // };
     return (
         <div>
         <div className="container mx-auto mt-10">
@@ -58,7 +53,7 @@ function Cart() {
             <div className="w-3/4 bg-color11 px-10 py-10">
               <div className="flex justify-between  border-b border-color12 pb-8">
                 <h1 className="font-medium text-color5 text-2xl">Shopping Cart</h1>
-                <h2 className="font-medium text-color5 text-2xl">{cart.quantity + cart.products.length-1} Items</h2>
+                <h2 className="font-medium text-color5 text-2xl">{cart.quantity} Items</h2>
               </div>
               <div className="flex mt-10 mb-5">
                 <h3 className="font-medium  text-color14 text-xs uppercase w-2/5">Product Details</h3>
@@ -66,11 +61,12 @@ function Cart() {
                 <h3 className="font-medium  text-color14 text-xs uppercase w-1/5 text-center">Price</h3>
                 <h3 className="font-medium  text-color14 text-xs uppercase w-1/5 text-center">Total</h3>
               </div>
-              {cart.products.map((product)=>(
+
+              {cart.products && cart.products.map((product)=>(
               <div className="flex items-center hover:bg-color8 -mx-8 px-6 py-5">
                 {/*<!-- product --> */}
                 
-                 <div className="flex w-2/5"> 
+                <div className="flex w-2/5"> 
                   <div className="w-20">
                     <img className="h-24" src={product.image_key} alt=""/>
                   </div>
@@ -81,7 +77,7 @@ function Cart() {
                   </div>
                 </div>
                 <div className="flex justify-center w-1/5">
-                 <svg onClick={()=> handleQuantity("dec",product)} className="fill-current text-color14 w-3 cursor-pointer" viewBox="0 0 448 512"><path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/>
+                <svg onClick={()=> handleQuantity("dec",product)} className="fill-current text-color14 w-3 cursor-pointer" viewBox="0 0 448 512"><path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/>
                   </svg>
       
                   <input className="mx-2 text-color3 border  border-color12 text-center w-8" type="text" value={product.quantity}/>
@@ -93,7 +89,7 @@ function Cart() {
                 <span className="text-center text-color3 w-1/5 font-medium text-sm">{product.price} SAR</span>
                 <span className="text-center text-color3 w-1/5 font-medium text-sm">{product.price * product.quantity} SAR</span>
               </div>
-             ))}
+            ))}
       
               <Link to="/" className="flex font-semibold text-color10 text-sm mt-10">
             
@@ -105,7 +101,7 @@ function Cart() {
             <div id="summary" className="w-1/4 px-8 py-10">
               <h1 className=" font-medium  text-color5 text-2xl border-b  border-color12 pb-8">Order Summary</h1>
               <div className="flex justify-between mt-10 mb-5">
-                <span className="font-semibold text-color3 text-sm uppercase">Items {cart.quantity + cart.products.length-1} </span>
+                <span className="font-semibold text-color3 text-sm uppercase">Items {cart.quantity} </span>
                 <span className="font-semibold  text-color1 text-sm">{cart.total} SAR</span>
               </div>
               <div className="flex justify-between mt-10 mb-5">
