@@ -1,7 +1,23 @@
-import React from 'react'
+import React,{useState} from 'react'
 import {Link } from "react-router-dom";
+import {useDispatch,useSelector} from "react-redux";
+import { login } from '../redux/apiCalls';
+import { useNavigate } from 'react-router';
 
 function Login() {
+    const [username, setUsername]= useState("");
+    const [password, setPassword]= useState("");
+    const dispatch = useDispatch();
+    const {isFetching,error} = useSelector((state) => state.user);
+
+    const handleClick = (e) => {
+        e.preventDefault();
+        login(dispatch,{username,password});
+    };
+    const user = useSelector((state) => state.user.currentUser);
+    const navigate = useNavigate();
+    user && navigate('/') 
+    
     return (
     <div>
     <div className="lg:flex">
@@ -14,17 +30,18 @@ function Login() {
         className="text-center text-4xl  text-color3  font-medium lg:text-left xl:text-5xl
               xl:text-bold"
       >
-        Log in
+        Sign In
       </h2>
       <div className="mt-12">
+
         <form >
           <div className="container">
             <div className="text-sm font-bold text-color3 tracking-wide">
               Username
             </div>
             <input
-              className="w-full text-lg py-2 border-b border-color12 focus:outline-none focus:border-indigo-500"
-              type
+              className="w-full text-lg py-2 border-b border-color12 text-color5 focus:outline-none focus:border-color2"
+              onChange={(e)=> setUsername(e.target.value)}
               placeholder="Enter your username"
             />
           </div>
@@ -36,8 +53,9 @@ function Login() {
 
             </div>
             <input
-              className="w-full text-lg py-2 border-b border-color12 focus:outline-none focus:border-indigo-500"
-              type
+              className="w-full text-lg py-2 text-color5 border-b  border-color12 focus:outline-none focus:border-color2"
+              onChange={(e)=> setPassword(e.target.value)}
+              type="password"
               placeholder="Enter your password"
             />
           </div>
@@ -45,11 +63,14 @@ function Login() {
           <div className="mt-10 pl4">
             <button
             className="bg-color1 border border-color1 text-color11 p-4 w-full rounded-md tracking-wide
-                font-medium text-2xl font-display focus:outline-none focus:shadow-outline hover:bg-transparent  hover:text-color1
-            shadow-lg"
+            font-medium text-2xl font-display focus:outline-none focus:shadow-outline hover:bg-transparent  hover:text-color1
+            shadow-lg "
+            onClick={(e)=>handleClick(e)}
+            disabled={isFetching}
             >
-              Log In
+              Login
             </button>
+            {error && <p className="my-12  text-lg font-display font-semibold text-center text-color9" > Something Went Wrong ! </p>}
           </div>
         </form>
         <div className="my-12  text-sm font-display font-semibold text-color3 text-center">

@@ -1,4 +1,7 @@
 import {BrowserRouter as Router,Routes,Route} from "react-router-dom";
+import  { Navigate } from 'react-router-dom'
+
+import {useDispatch,useSelector} from "react-redux";
 import Navbar from './Component/Navbar'
 import Success from './Component/Success'
 import Home from "./Pages/Home";
@@ -11,6 +14,7 @@ import Register from "./Component/Register"
 
 
 function App() {
+  
   return (
     <Router>
       <Navbar/>
@@ -20,8 +24,8 @@ function App() {
         <Route path="/products/:category" element=  {<ProductsList/>} />
         <Route path="/product/:id" element=  {<Product/>} />
         <Route path="/cart" element=  {<Cart/>} />
-        <Route path="/login" element=  {<Login/>} />
-        <Route path="/register" element=  {<Register/>} />
+        <Route path="/login"  element={<Login />}/>  
+        <Route path="/register" element={<Register />}/> 
         <Route path="/success" element= {<Success/>} />
       </Routes>
     </Router>
