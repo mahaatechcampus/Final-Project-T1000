@@ -9,13 +9,7 @@ export default function ProductsList() {
     const [filter,setFilter] = useState("");
     const [sort, setSort] = useState("newest");
 
-    const handleFilter = (e)=>{
-        const value = e.target.value;
-        setFilter({
-            [e.target.name]: value,
-        });
-    };
-
+    
 
 
     return (
@@ -38,8 +32,8 @@ export default function ProductsList() {
 
                 <div className=" flex gap-2 ml-auto">
                 <select name="brand" onChange={(e)=> setFilter(e.target.value)} className="w-44 justify-center  text-sm text-color5 px-4 py-3  border-color1 shadow-sm rounded focus:ring-color1 focus:border-color1">
-                <option  selected disabled>Brand</option>
-                    <option value="kiko">KIKO</option>
+                <option selected disabled>Brand</option>
+                    <option   value="kiko">KIKO</option>
                     <option value="benefit">Benefit</option>
                     <option value="nyx">NYX</option>
                     <option value="mac">MAC</option>
