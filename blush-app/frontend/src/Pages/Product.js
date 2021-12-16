@@ -2,13 +2,18 @@ import React from 'react'
 import {Link,useParams } from "react-router-dom";
 import {useState, useEffect} from "react";
 import axios from "axios";
-import { addProduct } from "../redux/cartRedux";
-import {useDispatch} from "react-redux";
+import {addProduct} from "../redux/cartRedux";
+import {useSelector,useDispatch} from "react-redux"
+import { useNavigate } from 'react-router';
 
 function Product() {
     const {id} = useParams();
     const [product,setProduct] = useState({});
     const [quantity,setQuantity] = useState(1)
+    const user = useSelector((state) => state.user.currentUser);
+    const navigate = useNavigate();
+
+
     const i = 0;
     const dispatch = useDispatch();
 
@@ -33,11 +38,12 @@ function Product() {
     }
 
     const handleClick = ()=>{
-        console.log({product,quantity, price:product.price * quantity})
+        
 
-        dispatch(
-            addProduct({...product,quantity, price:product.price * quantity})
+     user && dispatch(
+    addProduct({...product,quantity, price:product.price * quantity})
         )
+        
     };
 
 
@@ -111,7 +117,7 @@ function Product() {
 
                     {/* cart button */}
                     <div className="flex gap-3 border-b border-color12 pb-5 mt-6">
-                        <Link to="" onClick={()=> dispatch(addProduct({...product,quantity, price:product.price * quantity}))}  className="bg-color10 border border-color10 text-color11 px-8 py-2 font-medium rounded flex items-center gap-2 hover:bg-transparent hover:text-color10 transition">
+                        <Link to=""onClick={()=> handleClick()}  className="bg-color10 border border-color10 text-color11 px-8 py-2 font-medium rounded flex items-center gap-2 hover:bg-transparent hover:text-color10 transition">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd" />
                         </svg>

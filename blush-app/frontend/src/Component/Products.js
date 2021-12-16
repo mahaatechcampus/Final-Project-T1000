@@ -10,18 +10,18 @@ function Products({category,filters,sort}) {
 
 
     console.log(filters)
-
+     console.log(category)
     useEffect(() =>{ 
     const getProducts = async() =>{
             try {
-                const res = await axios.get(category.category?`http://localhost:8080/api/products?category=${category.category}`: "http://localhost:8080/api/products");
+                const res = await axios.get(category?`http://localhost:8080/api/products?category=${category}`: "http://localhost:8080/api/products");
                     setProducts(res.data)
                     console.log(res.data)
                 
             } catch (error) {
                 
             }
-        }
+        } 
         getProducts()
 
     },[category]) //lip, eye , face

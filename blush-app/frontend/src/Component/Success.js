@@ -16,7 +16,7 @@ export default function Success() {
         const createOrder = async () => {
           try {
             const res = await axios.post("http://localhost:8080/api/orders", {
-                userId: currentUser._id,
+              userId: currentUser._id,
                 products: cart.products.map((item) => ({
                 productId: item._id,
                 quantity: item._quantity,
@@ -28,7 +28,7 @@ export default function Success() {
           } catch {}
         };
         stripeData && createOrder();
-        // stripeData && dispatch(cartEmptyifPayed());
+        stripeData  && dispatch(cartEmptyifPayed());
 
       }, [cart, stripeData ]);
     

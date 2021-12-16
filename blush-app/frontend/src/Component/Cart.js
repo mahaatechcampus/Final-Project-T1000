@@ -37,7 +37,6 @@ function Cart() {
 
 
     const handleQuantity = (type,quantity) => {
-
         if(type === "dec" &&  quantity > 1 ){
             quantity +=1 
         }
@@ -45,6 +44,7 @@ function Cart() {
             quantity -=1;
         }
     }
+
     return (
         <div>
         <div className="container mx-auto mt-10">
@@ -139,4 +139,4 @@ function Cart() {
     )
 }
 
-export default Cart
+export default Cart;
