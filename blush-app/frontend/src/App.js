@@ -10,6 +10,7 @@ import Cart from "./Component/Cart"
 import Login from "./Component/Login"
 import Register from "./Component/Register"
 import Account from "./Pages/Account"
+import Wishlist from "./Pages/Wishlist"
 
 
 
@@ -27,6 +28,7 @@ function App() {
         <Route path="/login"  element={<Login />}/>  
         <Route path="/register" element={<Register />}/> 
         <Route path="/account" element={<Account />}/> 
+        <Route path="/wishlist" element={<Wishlist />}/> 
         <Route path="/success" element= {<Success/>} />
       </Routes>
     </Router>
