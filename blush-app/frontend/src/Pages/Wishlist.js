@@ -1,23 +1,33 @@
 import React from 'react'
 import {Link} from "react-router-dom";
 import {useSelector,useDispatch} from "react-redux"
-import { useNavigate } from 'react-router';
 import { logoutuser } from '../redux/userRedux';
+import {addProduct} from "../redux/cartRedux";
+import { useNavigate } from 'react-router';
 
 function Wishlist() {
     const user = useSelector((state) => state.user.currentUser);
+    const wishlist = useSelector((state) => state.wishlist);
     const dispatch = useDispatch();
-const navigate = useNavigate();
+    const navigate = useNavigate();
+
+
 
 const handleClick = ()=>{
     dispatch(
     logoutuser()
     )
 };
+const handleAddToCart = (product)=>{
+    user && dispatch(
+    addProduct({...product, price:product.price})
+        ) 
+    };
 
     return (
        
         <div> 
+            {user? <>
           
             {/* account wrapper */}
             <div className="container grid grid-cols-12 items-start gap-6 pt-4 pb-16">
@@ -33,7 +43,7 @@ const handleClick = ()=>{
 
                         <div className="flex-grow">
                             <p className="text-color14 "> Hello,</p>
-                            <h4 className="text-color10 font-medium">{user.user.username} </h4>
+                            <h4 className="text-color10 font-medium">{user && user.user.username} </h4>
                         </div>
                     </div>
                     {/* account prof. end */}
@@ -103,18 +113,20 @@ const handleClick = ()=>{
             {/* wish list */}
             <div className="col-span-9 space-y-4">
                 {/* single wishlist */}
+                {wishlist.products && wishlist.products.map((product)=>(
+
                 <div className="flex items-center justify-between gap-6 p-4 border border-color12 rounded">
                    {/* img wish */}
-                    <div className="w-28 flex-shrink-0">
-                        <img src="" className="w-full" alt="wishlist img product"/>
+                    <div className="w-28  flex-shrink-0">
+                        <img src={product.image_key} className="w-full" alt="wishlist img product"/>
                     </div>
                     {/* wishlist content */}
                     <div className="w-1/3">
-                        <h2 className="text-color3 text-lg font-medium">product title</h2> 
+                        <h2 className="text-color3 text-md font-medium">{product.name}</h2> 
                         <p className="text-color4 text-sm"> Availability: <span className="text-color1" >In Stock</span> </p>
                     </div>
-                    <div className="text-color10 text-md font-semibold">200 SAR</div>
-                    <Link to="" className="px-6 py-2 bg-color10 border border-color10 text-color11 font-medium rounded flex items-center gap-2 hover:bg-transparent hover:text-color10 transition"> Add To Cart</Link>
+                    <div className="text-color10 text-md font-semibold">{product.price} SAR</div>
+                    <Link to="" onClick={()=> handleAddToCart(product)} className="px-4 py-2 bg-color10 border border-color10 text-color11 font-medium rounded flex items-center gap-2 hover:bg-transparent hover:text-color10 transition"> Add To Cart</Link>
                     <div className="text-color14  cursor-pointer hover:text-color10 ">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
@@ -122,11 +134,15 @@ const handleClick = ()=>{
                     </div>
 
                 </div>
+                ))}
 
             </div>
 
 
 </div>
+</>  :  <div> Sorry Should be Login {navigate("/login")} </div>
+        
+    }
 </div>
 )}
 export default Wishlist;

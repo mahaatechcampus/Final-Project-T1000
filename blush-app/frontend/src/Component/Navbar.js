@@ -9,6 +9,8 @@ import { logoutuser } from '../redux/userRedux';
 function Navbar() {
 
 const quantity =  useSelector(state => state.cart.quantity)
+const quantitywish =  useSelector(state => state.wishlist.quantity)
+
 const user = useSelector((state) => state.user.currentUser);
 const dispatch = useDispatch();
 const navigate = useNavigate();
@@ -42,13 +44,13 @@ const handleClick = ()=>{
 
                 {/* icons */}
                 <div className="flex item-center text-center space-x-8">
-                    <Link to="" className="text-center text-color12 hover:text-color1 transition relative">
+                    <Link to="/wishlist" className="text-center text-color12 hover:text-color1 transition relative">
                         <div className="text-2xl">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-2xl ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                         </svg></div>
                         <div className="text-xs leading-3">Wishlist</div>
-                        <span className=" absolute right-0 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-color10 text-color11 text-xs">9</span>
+                        <span className=" absolute right-0 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-color10 text-color11 text-xs">{user?quantitywish : 0}</span>
                     </Link>
 
                     <Link to="/cart" className="text-center text-color12 hover:text-color1 transition relative">
@@ -58,7 +60,7 @@ const handleClick = ()=>{
                     </svg></div>
 
                     <div className="text-xs leading-3">Cart</div>
-                    <span className=" absolute right-0 left-6 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-color10 text-color11 text-xs">{quantity}</span>
+                    <span className=" absolute right-0 left-6 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-color10 text-color11 text-xs">{user?quantity: 0}</span>
                     </Link>
 
                 { user ? <>

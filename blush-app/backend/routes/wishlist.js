@@ -40,7 +40,7 @@ router.delete("/:id",verifyTokenAndAuthorization, async (req,res,) =>{
 // ==== GET User Wishlist ====// 
 router.get("/find/:userId",verifyTokenAndAuthorization, async (req,res,) =>{ // userId
     try {
-        const wishlist = await Wishlist.findOne({userId: req.params.userId}); // findOne beacose every user have a one cart
+        const wishlist = await Wishlist.findOne({userId: req.params.userId}); // findOne beacose every user have a one wishlist
         res.status(200).json(wishlist)
     } catch (error) {
         res.status(500).json(error)

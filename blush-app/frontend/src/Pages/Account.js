@@ -7,9 +7,9 @@ import { logoutuser } from '../redux/userRedux';
 function Account() {
     const user = useSelector((state) => state.user.currentUser);
     const dispatch = useDispatch();
-const navigate = useNavigate();
+    const navigate = useNavigate();
 
-const handleClick = ()=>{
+    const handleClick = ()=>{
     dispatch(
     logoutuser()
     )
@@ -122,10 +122,10 @@ const handleClick = ()=>{
             {/* end profile info */}
         </div>
         
-         </> : <div> Sorry Should be Login {navigate("/login")} </div>
+        </> : <div> Sorry Should be Login {navigate("/login")} </div>
         
-         }
-       
+        }
+
         </div>
     )
 }

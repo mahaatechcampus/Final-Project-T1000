@@ -3,6 +3,7 @@ import {Link,useParams } from "react-router-dom";
 import {useState, useEffect} from "react";
 import axios from "axios";
 import {addProduct} from "../redux/cartRedux";
+import {addProductWish} from "../redux/wishlistRedux";
 import {useSelector,useDispatch} from "react-redux"
 import { useNavigate } from 'react-router';
 
@@ -37,14 +38,17 @@ function Product() {
         }
     }
 
-    const handleClick = ()=>{
-        
-
-     user && dispatch(
+    const handleAddToCart = ()=>{
+    user && dispatch(
     addProduct({...product,quantity, price:product.price * quantity})
-        )
-        
+        ) 
     };
+
+    const handleAddToWish = ()=>{
+        user && dispatch(
+            addProductWish({...product})
+            ) 
+        };
 
 
     if (!Object.keys(product).length) return <div>Loading</div>;
@@ -117,14 +121,14 @@ function Product() {
 
                     {/* cart button */}
                     <div className="flex gap-3 border-b border-color12 pb-5 mt-6">
-                        <Link to=""onClick={()=> handleClick()}  className="bg-color10 border border-color10 text-color11 px-8 py-2 font-medium rounded flex items-center gap-2 hover:bg-transparent hover:text-color10 transition">
+                        <Link to=""onClick={()=> handleAddToCart()}  className="bg-color10 border border-color10 text-color11 px-8 py-2 font-medium rounded flex items-center gap-2 hover:bg-transparent hover:text-color10 transition">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd" />
                         </svg>
                         Add to Cart 
                         </Link>
 
-                        <Link to="" className=" border border-color12 text-color14 px-8 py-2 font-medium rounded flex items-center gap-2  hover:text-color10 transition">
+                        <Link to="" onClick={()=> handleAddToWish()} className=" border border-color12 text-color14 px-8 py-2 font-medium rounded flex items-center gap-2  hover:text-color10 transition">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
                         </svg>

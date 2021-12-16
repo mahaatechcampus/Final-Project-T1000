@@ -5,14 +5,17 @@ import {removeProduct} from "../redux/cartRedux";
 import StripeCheckout from "react-stripe-checkout";
 import axios from "axios";
 import { useNavigate } from 'react-router';
+import { cartEmptyifPayed } from '../redux/cartRedux';
 
 
 function Cart() {
     const KEY = 'pk_test_51K4QRoFYQSGZ6LgGFutNv3mcj4mNmIdz9nRX1v74QY1pY2quazCAe4NcurFP5vqrgb6pL6ztGZI00U2EXRvEGzie00Hs063D2O';
     const cart = useSelector(state => state.cart);
-    console.log(cart)
+    const user = useSelector(state => state.user.currentUser);
     const [stripeToken, setStripeToken] = useState(null)
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+
 
 
     const onToken = (token)=>{
@@ -44,6 +47,10 @@ function Cart() {
             quantity -=1;
         }
     }
+    useEffect(() =>{
+      !user  && dispatch(cartEmptyifPayed());
+
+    },[])
 
     return (
         <div>
@@ -62,7 +69,7 @@ function Cart() {
                 <h3 className="font-medium  text-color14 text-xs uppercase w-1/5 text-center">Total</h3>
               </div>
 
-              {cart.products && cart.products.map((product)=>(
+              {user && cart.products && cart.products.map((product)=>(
               <div className="flex items-center hover:bg-color8 -mx-8 px-6 py-5">
                 {/*<!-- product --> */}
                 
