@@ -67,7 +67,7 @@ function Cart() {
                 <h3 className="font-medium  text-color14 text-xs uppercase w-1/5 text-center">Quantity</h3>
                 <h3 className="font-medium  text-color14 text-xs uppercase w-1/5 text-center">Price</h3>
                 <h3 className="font-medium  text-color14 text-xs uppercase w-1/5 text-center">Total</h3>
-              </div>
+              </div> 
 
               {user && cart.products && cart.products.map((product)=>(
               <div className="flex items-center hover:bg-color8 -mx-8 px-6 py-5">
