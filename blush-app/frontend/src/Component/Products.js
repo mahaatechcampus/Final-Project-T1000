@@ -2,65 +2,61 @@ import { useState, useEffect} from "react";
 import {Link} from "react-router-dom";
 import axios from "axios";
 
-function Products({category,filters,sort}) {
+function Products({category,filter,sort}) {
 
     const [products,setProducts] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [sortredProducts, setSortredProducts] = useState([]);
+    const [resetProducts, setresetProducts] = useState(false);
 
 
-    console.log(filters)
-     console.log(category)
+    console.log(filter)
+    console.log(category)
+    console.log(sort)
+
     useEffect(() =>{ 
     const getProducts = async() =>{
             try {
                 const res = await axios.get(category?`http://localhost:8080/api/products?category=${category}`: "http://localhost:8080/api/products");
-                    setProducts(res.data)
-                    console.log(res.data)
-                
-            } catch (error) {
-                
-            }
+                    setProducts(res.data)  
+            } catch (error) {}
         } 
-        getProducts()
-
+            getProducts()
     },[category]) //lip, eye , face
 
     //fetch by category & filter 
-    // useEffect(() => {
-    //     category && setFilteredProducts(
-    //         products.filter((item) =>
-    //         Object.entries(filters).every(([key, value]) =>
-    //         item[key].includes(value)
-    //         )    
-    //     )
-    //     );
 
-    // },[products,category,filters ]) ; 
+    useEffect(() => {
 
-    useEffect(()=>{ 
-        if(sort === "newest"){
-            setSortredProducts((prev)=>
-            products.sort((a,b)=> a.createdAt - b.createdAt)
-            );
-           } else  if(sort === "asc"){
-            setSortredProducts((prev)=>
-            products.sort((a,b)=> a.price - b.price)
-            );
-           } else { 
-            setSortredProducts((prev)=>
-            products.sort((a,b)=> b.price - a.price)
-            );
-        }
+        category && setFilteredProducts(
+            products.filter(pro => pro.categories[1] === filter)
+        )
+    },[products,category,filter]); 
 
-    },[sort]);
+    // useEffect(()=>{ 
+    //     if(sort === "newest"){
+    //         setSortredProducts((prev)=>
+    //         products.sort((a,b)=> a.createdAt - b.createdAt)
+    //         );
+    //        } else  if(sort === "asc"){
+    //         setSortredProducts((prev)=>
+    //         products.sort((a,b)=> a.price - b.price)
+    //         );
+    //        } else { 
+    //         setSortredProducts((prev)=>
+    //         products.sort((a,b)=> b.price - a.price)
+    //         );
+    //     }
+
+    // },[sort]);
 
 
 
     return (
         <div className="grid grid-cols-3 gap-6">
           {/* map products */}
-        {products.map((item) => (
+          
+        {filteredProducts.map((item) => (
 
     <div className="bg-color11 shadow rounded overflow-hidden group ">
                 {/* product image */}
@@ -120,4 +116,4 @@ function Products({category,filters,sort}) {
     )
 }
 
-export default Products
+export default Products;
