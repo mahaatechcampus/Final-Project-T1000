@@ -19,8 +19,6 @@ export default function ProductsList() {
             {/* products */}
             <div className="col-span-3">
                 {/* sorting */}
-            
-                
                 <div className="flex items-center mb-4">
                 <select name="sort" onChange={(e)=> setSort(e.target.value)} className="w-44 text-sm justify-center text-color5 px-4 py-3  border-color12 shadow-sm rounded focus:ring-color1 focus:border-color1">
                 <option  selected disabled>Sort</option>

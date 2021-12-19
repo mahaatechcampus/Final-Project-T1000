@@ -30,7 +30,7 @@ function Search() {
         <div className="col-span-3">
         <div className="grid grid-cols-3 gap-6">
 
-         {products && products.map((item) => (
+        {products && products.map((item) => (
             <div className="bg-color11 shadow rounded overflow-hidden group ">
             {/* product image */}
             <div className="relative" >
@@ -81,12 +81,12 @@ function Search() {
         <Link to="" className="block w-full py-1 text-center text-color11 bg-color10 border border-color10 rounded-b hover:bg-transparent hover:text-color10 transition">
         Add To Cart
         </Link>
-      </div> ))} 
+        </div> ))} 
         </div>
         </div>
         </div>
         </>
-     
+    
     )
 }
 

@@ -16,7 +16,8 @@ function Login() {
     };
     const user = useSelector((state) => state.user.currentUser);
     const navigate = useNavigate();
-    user && navigate('/') 
+    // user && console.log(user.user.isAdmin)
+   user && ( user.user.isAdmin ? navigate('/dashboard') : navigate('/'))
 
     return (
     <div>
