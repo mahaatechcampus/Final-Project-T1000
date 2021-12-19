@@ -72,4 +72,30 @@ router.get("/", async (req,res,) =>{
     }
 });
 
+//====  Get Product name search api ====//
+router.get('/search/:searchTerm', async (req, res) => {
+  try {
+    const searchTerm = req.params.searchTerm;
+
+    const productDoc = await Product.find(
+      { name: { $regex: new RegExp(searchTerm), $options: 'is' } },
+      { name: 1,  image_key: 1, price: 1, _id: 1 }
+    );
+
+    if (productDoc.length < 0) {
+      return res.status(404).json({
+        message: 'No product found.'
+      });
+    }
+
+    res.status(200).json({
+      products: productDoc
+    });
+  } catch (error) {
+    res.status(400).json({
+      error: 'Your request could not be processed. Please try again.'
+    });
+  }
+});
+
 module.exports = router;

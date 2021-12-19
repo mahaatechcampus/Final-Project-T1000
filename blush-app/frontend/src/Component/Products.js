@@ -53,8 +53,8 @@ function Products({category,filter,sort}) {
     return (
         <div className="grid grid-cols-3 gap-6">
           {/* map products */}
-          
-        {category  ? filteredProducts.map((item) => (
+
+        {filter && category  ? filteredProducts.map((item) => (
 
     <div className="bg-color11 shadow rounded overflow-hidden group ">
                 {/* product image */}

@@ -11,7 +11,7 @@ import Login from "./Component/Login"
 import Register from "./Component/Register"
 import Account from "./Pages/Account"
 import Wishlist from "./Pages/Wishlist"
-
+import Search from "./Component/Search"
 
 
 function App() {
@@ -27,6 +27,7 @@ function App() {
         <Route path="/cart" element=  {<Cart/>} />
         <Route path="/login"  element={<Login />}/>  
         <Route path="/register" element={<Register />}/> 
+        <Route path="/search/:searchTerm" element={<Search/>}/>
         <Route path="/account" element={<Account />}/> 
         <Route path="/wishlist" element={<Wishlist />}/> 
         <Route path="/success" element= {<Success/>} />

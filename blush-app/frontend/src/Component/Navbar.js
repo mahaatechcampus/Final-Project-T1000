@@ -1,13 +1,14 @@
-import React from 'react'
+import React,{useState} from 'react'
 import {Link} from "react-router-dom";
 import {useSelector,useDispatch} from "react-redux"
 import { useNavigate } from 'react-router';
 import { logoutuser } from '../redux/userRedux';
-
+import Search from './Search';
 
 
 function Navbar() {
 
+const [searchTerm, setSearchTerm] = useState("");
 const quantity =  useSelector(state => state.cart.quantity)
 const quantitywish =  useSelector(state => state.wishlist.quantity)
 
@@ -33,14 +34,19 @@ const handleClick = ()=>{
             height="75"
             alt="Blush Store"/> 
                 </Link>
-                {/* SearchBar */}
+
+              {/* SearchBar */}
                 <div className='w-full max-w-xl relative flex'>
                 <span className="absolute left-4 top-3 text-lg text-color12"> <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg></span>
-                <input type="text" className="w-full border border-color1 border-r-0 pl-12 py-3 pr-3 rounded-l-md focus:outline-none" placeholder="Search"/>
-                <button className="bg-color1 border border-color1  text-color11 px-8 rounded-r-md hover:bg-transparent hover:text-color1 transition">Search</button>
+                <input type="text" 
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full border border-color1 border-r-0 pl-12 py-3 pr-3 rounded-l-md focus:outline-none" placeholder="Search"/>
+                <Link to={`/search/${searchTerm}`} className=" block py-3  text-center bg-color1 border border-color1  text-color11 px-8 rounded-r-md hover:bg-transparent hover:text-color1 transition">Search</Link>
                 </div>
+                
+                
 
                 {/* icons */}
                 <div className="flex item-center text-center space-x-8">
