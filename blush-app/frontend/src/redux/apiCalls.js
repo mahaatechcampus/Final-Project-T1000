@@ -1,4 +1,5 @@
-import {loginFailure, loginStart,loginSuccess,signup} from "./userRedux"
+import {loginFailure, loginStart,loginSuccess,signup} from "./userRedux";
+import {deleteProduct} from "./cartRedux";
 import axios from "axios";
 
 export const login = async (dispatch,user) =>{
@@ -22,6 +23,14 @@ export const register = async (dispatch,user) =>{
         dispatch(loginFailure());
     }
 }
+
+export const deleteProductt = async (id, dispatch) => {
+    try {
+      const res = await axios.delete(`http://localhost:8080/api/carts/${id}`);
+      dispatch(deleteProduct(id));
+    } catch (err) {
+    }
+  };
 
 
 

@@ -3,17 +3,33 @@ import {Link } from "react-router-dom";
 import {useDispatch,useSelector} from "react-redux";
 import { login } from '../redux/apiCalls';
 import { useNavigate } from 'react-router';
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 function Login() {
     const [username, setUsername]= useState("");
     const [password, setPassword]= useState("");
     const dispatch = useDispatch();
     const {isFetching,error} = useSelector((state) => state.user);
+    const MySwal = withReactContent(Swal)
+    const Toast = MySwal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 1000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', MySwal.stopTimer)
+        toast.addEventListener('mouseleave', MySwal.resumeTimer)
+      }
+    });
+
 
     const handleClick = (e) => {
         e.preventDefault();
-        login(dispatch,{username,password});
-    };
+        login(dispatch,{username,password});  
+    }
+
     const user = useSelector((state) => state.user.currentUser);
     const navigate = useNavigate();
     // user && console.log(user.user.isAdmin)

@@ -1,12 +1,13 @@
 import React ,{useState, useEffect} from 'react';
 import {Link} from "react-router-dom";
 import {useSelector,useDispatch} from "react-redux";
-import {removeProduct} from "../redux/cartRedux";
+import {deleteProductt} from '../redux/apiCalls';
 import StripeCheckout from "react-stripe-checkout";
 import axios from "axios";
 import { useNavigate } from 'react-router';
 import { cartEmptyifPayed } from '../redux/cartRedux';
-
+import { deleteProduct} from '../redux/cartRedux';
+import {userRequest} from '../Admin/requestMethode';
 
 function Cart() {
     const KEY = 'pk_test_51K4QRoFYQSGZ6LgGFutNv3mcj4mNmIdz9nRX1v74QY1pY2quazCAe4NcurFP5vqrgb6pL6ztGZI00U2EXRvEGzie00Hs063D2O';
@@ -17,7 +18,7 @@ function Cart() {
     const dispatch = useDispatch();
 
 
-
+console.log(cart)
     const onToken = (token)=>{
         setStripeToken(token);
     };
@@ -51,6 +52,18 @@ function Cart() {
       !user  && dispatch(cartEmptyifPayed());
 
     },[])
+    
+    //delete product
+  //   const deleteProduct =  (product)=> {
+  //     try {
+  //     cart.products.splice(cart.products.findIndex((item)=> item._id === product._id),1);
+  //     cart.quantity -=1;
+  //     cart.total -=product.price
+  //     console.log(cart.products)
+  //     }
+  //     catch (error) {}
+  // };
+
 
     return (
         <div>
@@ -80,7 +93,7 @@ function Cart() {
                   <div className="flex flex-col justify-between ml-4 flex-grow">
                     <span className="font-bold text-color3 text-sm">{product.name}</span>
                     <span className="text-color1 text-xs">{product.brand[0].name}</span>
-                   {/* <Link to="#" onClick={()=> handleRemove(product,product.quantity,product._id)} className="font-medium hover:text-color10  text-color14 text-xs">Remove</Link> */}
+                    {/* <Link to="#" onClick={() => deleteProduct(product)} className="font-medium hover:text-color10  text-color14 text-xs">Remove</Link> */}
                   </div>
                 </div>
                 <div className="flex justify-center w-1/5">
