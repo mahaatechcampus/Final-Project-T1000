@@ -158,7 +158,7 @@ function ProductsAdmin() {
         
             {/* sidebarend */}
                 <div className="col-span-9 space-y-4">
-                <Link to="/dashboard/products/add"  className="px-2 py-2  bg-color10 border border-color10 text-color11 font-medium rounded  hover:bg-transparent hover:text-color10 transition"> Add New product</Link>
+                <Link to="/dashboard/products/add"  className=" flex gap-2 ml-auto w-44 justify-center px-2 py-2  bg-color10 border border-color10 text-color11 font-medium rounded  hover:bg-transparent hover:text-color10 transition"> Add New product</Link>
 
                 {/* single product */}
                 {products && products.map((product)=>(
