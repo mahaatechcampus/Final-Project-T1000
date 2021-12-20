@@ -1,13 +1,11 @@
 import React ,{useState, useEffect} from 'react';
 import {Link} from "react-router-dom";
 import {useSelector,useDispatch} from "react-redux";
-import {deleteProductt} from '../redux/apiCalls';
 import StripeCheckout from "react-stripe-checkout";
 import axios from "axios";
 import { useNavigate } from 'react-router';
 import { cartEmptyifPayed } from '../redux/cartRedux';
 import { deleteProduct} from '../redux/cartRedux';
-import {userRequest} from '../Admin/requestMethode';
 
 function Cart() {
     const KEY = 'pk_test_51K4QRoFYQSGZ6LgGFutNv3mcj4mNmIdz9nRX1v74QY1pY2quazCAe4NcurFP5vqrgb6pL6ztGZI00U2EXRvEGzie00Hs063D2O';

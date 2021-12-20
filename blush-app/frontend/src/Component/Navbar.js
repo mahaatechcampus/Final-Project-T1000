@@ -1,10 +1,8 @@
 import React,{useState} from 'react'
 import {Link} from "react-router-dom";
-import {useSelector,useDispatch} from "react-redux"
+import {useSelector} from "react-redux"
 import { useNavigate } from 'react-router';
-import { logoutuser } from '../redux/userRedux';
 import UserDropdown from './UserDropdown';
-import Search from './Search';
 
 
 function Navbar() {
@@ -14,14 +12,9 @@ const quantity =  useSelector(state => state.cart.quantity)
 const quantitywish =  useSelector(state => state.wishlist.quantity)
 
 const user = useSelector((state) => state.user.currentUser);
-const dispatch = useDispatch();
 const navigate = useNavigate();
 
-const handleClick = ()=>{
-    dispatch(
-    logoutuser()
-    )
-};
+
     return (
         <>
         {/* header navbar */}
@@ -70,21 +63,8 @@ const handleClick = ()=>{
                     <span className=" absolute right-0 left-6 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-color10 text-color11 text-xs">{user?quantity: 0}</span>
                     </Link>
 
-                { user ?
-                    (
-            <>
-              <UserDropdown />
-              {/* logout */}
-              {/* // <Link to=""  onClick={()=> handleClick()} className="text-center text-color12 hover:text-color1 transition relative" >
-                    // <div  className="text-2xl">
-                    // <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-2xl ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    // <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-                    // </svg>
-                    // </div>
-                    // <div className="text-xs leading-3 text-center" >Logout</div>
-                    // </Link> */}
-                    </>
-                    ) : ( <>
+                { user ? ( <UserDropdown />)
+                    : ( <>
                     <Link to="/login" className="text-center text-color14 hover:text-color1 transition relative">
                     <div className="text-2xl">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-2xl text-center" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -110,21 +90,11 @@ const handleClick = ()=>{
                         <Link to="/products/eye" className="text-color11 hover:text-color3 transition" >Eye</Link>
                         <Link to="/products/face" className="text-color11 hover:text-color3 transition" >Face</Link>
                         <Link to="/products/lip" className="text-color11 hover:text-color3 transition" >Lip</Link>
-                        {/* <Link to="" className="text-color11 hover:text-color3 transition" >Brands</Link>  */}
                     </div>
                 </div>
             </div>
         </div>
 
-
-{/* Live chating here */}
-        {/* <div className="absolute bottom-0 right-0 mb-4 mr-4 z-10">
-            <div>
-                <Link title="Follow me on twitter" to="https://www.twitter.com/asad_codes" target="_blank" class="block w-16 h-16 rounded-full transition-all shadow hover:shadow-lg transform hover:scale-110 hover:rotate-12">
-                    <img className="object-cover object-center w-full h-full rounded-full" src="https://www.imore.com/sites/imore.com/files/styles/large/public/field/image/2019/12/twitter-logo.jpg"/>
-                </Link>
-            </div>
-        </div> */}
 </>
     )
 }

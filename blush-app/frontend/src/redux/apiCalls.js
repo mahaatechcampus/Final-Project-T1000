@@ -26,11 +26,11 @@ export const register = async (dispatch,user) =>{
 
 export const deleteProductt = async (id, dispatch) => {
     try {
-      const res = await axios.delete(`http://localhost:8080/api/carts/${id}`);
-      dispatch(deleteProduct(id));
+    const res = await axios.delete(`http://localhost:8080/api/carts/${id}`);
+    dispatch(deleteProduct(id));
     } catch (err) {
     }
-  };
+    };
 
 
 

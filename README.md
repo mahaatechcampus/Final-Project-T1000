@@ -39,6 +39,7 @@
 - Redux
 - tawk.to - Live Chat
 - Tailwind - Css
+- CryptoJS (AES) - Encrypt Passoword 
 
 ​
 # Client / Frontend

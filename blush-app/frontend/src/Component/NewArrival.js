@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 function NewArrival() {
     return (
         <div>
-                   {/* New Arrival */}
+         {/* New Arrival */}
         <div className="container pb-16">
             <h2 className="text-2xl font-medium text-color5 uppercase mb-6">Top New Arrival</h2>
             {/* product Grid */}
@@ -116,7 +116,7 @@ function NewArrival() {
                 </div>
 
                  {/* single product */}
-                 <div className=" bg-color11 shadow rounded group overflow-hidden ">
+                <div className=" bg-color11 shadow rounded group overflow-hidden ">
                     {/* product image */}
                     <div className="relative" >
                         <img src="https://pa.namshicdn.com/product/32/0192/v5/1-web-desktop-list.webp" alt="nyx product"className="w-full" />
@@ -170,7 +170,7 @@ function NewArrival() {
 
 
                   {/* single product */}
-                  <div className=" bg-color11 shadow rounded group overflow-hidden ">
+                    <div className=" bg-color11 shadow rounded group overflow-hidden ">
                     {/* product image */}
                     <div className="relative" >
                         <img src="https://pa.namshicdn.com/product/11/0192/v6/1-web-desktop-list.webp" alt="nyx product"className="w-full" />
@@ -221,10 +221,6 @@ function NewArrival() {
                 Add To Cart
                 </Link>
                 </div>
-
-
-
-
             </div>
         </div> 
         </div>

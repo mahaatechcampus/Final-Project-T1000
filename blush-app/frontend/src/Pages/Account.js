@@ -16,7 +16,6 @@ function Account() {
 };
 
     return (
-       
         <div> 
             {user ?
             <>

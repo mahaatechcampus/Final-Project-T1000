@@ -4,7 +4,7 @@ const CryptoJS = require("crypto-js");
 const jwt = require("jsonwebtoken");
 const {verifyToken, verifyTokenAndAuthorization,verifyTokenAndAdmin} = require("./verifyToken");
 
-//==== Create Cart ====// << just AS Admin can  create
+//==== Create Cart ====// 
 router.post('/',verifyToken, async (req, res)=>{
     const newCart = new Cart(req.body)
     try {
@@ -28,7 +28,7 @@ router.put("/:id",verifyTokenAndAuthorization, async (req,res) => {
     });
 
     //==== Deleting ====// 
-router.delete("/:id", async (req,res,) =>{
+router.delete("/:id",verifyTokenAndAuthorization, async (req,res,) =>{
     try {
         await Cart.findByIdAndDelete(req.params.id);
         res.status(200).json("Cart has been deleted ...")
