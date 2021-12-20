@@ -13,6 +13,7 @@ import Search from "./Component/Search"
 import Dashboard from "./Admin/Dashboard"
 import ProductsAdmin from "./Admin/ProductsAdmin";
 import AddProductAdmin from "./Admin/AddProductAdmin";
+import Editproduct from "./Admin/Editproduct";
 
 function App() {
   
@@ -34,6 +35,8 @@ function App() {
         <Route path="/dashboard" element= {<Dashboard />}/>
         <Route path="/dashboard/products"element= {<ProductsAdmin />}/>
         <Route path="/dashboard/products/add"element= {<AddProductAdmin />}/>
+        <Route path="/dashboard/products/:id"element= {<Editproduct />}/>
+
 
       </Routes>
     </Router>
