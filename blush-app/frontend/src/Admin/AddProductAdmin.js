@@ -1,11 +1,13 @@
-import React,{useState} from 'react'
+import { useState} from "react";
 import {Link} from "react-router-dom";
 import {useSelector,useDispatch} from "react-redux"
-import { useNavigate } from 'react-router';
-import { logoutuser } from '../redux/userRedux';
+import { useNavigate,useParams } from 'react-router';
 import {userRequest} from './requestMethode';
+import axios from "axios";
+import { logoutuser } from '../redux/userRedux';
 
 function AddProductAdmin() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.currentUser);
   const [brandd,setBrand] = useState("");
@@ -13,22 +15,13 @@ function AddProductAdmin() {
   const [name,setName] = useState("");
   const [price,setPrice] = useState("");
   const [category,setCategory] = useState("");
-
   const [product,setProduct] = useState({
     brand: [{name: brandd, key: brandd }],
     image_key : img,
-     name : name,
-     price : price,
-     categories:[category,brandd]
+    name : name,
+    price : price,
+    categories:[category,brandd]
   })
-  
-  const navigate = useNavigate();
-
-  const handleClick = ()=>{
-  dispatch(
-  logoutuser()
-  )
-};
 
 const addProduct = async () => {
   console.log(product)
@@ -39,13 +32,18 @@ const addProduct = async () => {
     }
     
     catch (error) {}
-}
+};
+const handleClick = ()=>{
+  dispatch(
+  logoutuser()
+  )
+};
 
     return (
-        <div>
 
-          {/* account wrapper */}
-          <div className="container grid grid-cols-12 items-start gap-6 pt-4 pb-16">
+    <div className="container grid grid-cols-12 items-start gap-6 pt-4 pb-16">
+            {user ?
+            <> 
                 {/* sidebar */}
                 <div className="col-span-3">
                     {/* account profile */}
@@ -129,6 +127,7 @@ const addProduct = async () => {
                             Reports
                             </Link>
                         </div>
+
                             {/* single links  */}
                             <div className="space-y-1  pl-8 pt-4">
                             <Link to="" className="relative text-color14  hover:text-color10 block font-medium capitalize transition">
@@ -139,7 +138,9 @@ const addProduct = async () => {
                             </span>
                             Manage 
                             </Link>
+
                         </div>
+
                              {/* single links  */}
                             <div className="space-y-1  pl-8 pt-4">
                             <Link 
@@ -154,14 +155,14 @@ const addProduct = async () => {
                             Logout 
                             </Link>
                         </div>
+
                     </div>
                 </div>
             {/* sidebarend */}
-            <form>
             <div className="col-span-9">
             <div className=" min-h-screen py-6 flex flex-col justify-center sm:py-12">
           <div className="relative py-3 sm:max-w-xl sm:mx-auto">
-            <div className="relative px-4 py-10 bg-color11 mx-8 md:mx-0 shadow rounded-md sm:p-10">
+            <div className="relative px-24 py-10 bg-color11 mx-8 md:mx-0 shadow rounded-md sm:p-10">
               <div className="max-w-md mx-auto">
                 <div className="flex items-center space-x-5">
                   <div className="block pl-2 font-semibold text-xl self-start text-color1">
@@ -172,26 +173,26 @@ const addProduct = async () => {
                   <div className="py-8 text-base leading-6 space-y-4 text-color14 sm:text-lg sm:leading-7">
                     <div className="flex flex-col">
                       <label className="leading-loose">Product Name</label>
-                      <input defaultValue={name} onChange={(e)=>{product.name = e.target.value; setProduct({...product})}} type="text" className="px-4 py-2 border focus:ring-color1 focus:border-color1 w-full sm:text-sm border-color14 rounded-md focus:outline-none text-color12" placeholder="Product Name" />
+                      <input defaultValue={name} onChange={(e)=>{product.name = e.target.value; setProduct({...product})}} type="text" className="px-4 py-2 border focus:ring-color1 focus:border-color1 w-full sm:text-sm border-color14 rounded-md focus:outline-none text-color5" placeholder="Product Name" />
                     </div>
                     <div className="flex flex-col">
                       <label className="leading-loose">Product Brand</label>
                       <input defaultValue={brandd} onChange={(e)=>{product.brand = [{name:e.target.value,key:e.target.value}]; setProduct({...product})}}
-                      type="text" className="px-4 py-2 border focus:ring-color1 focus:border-color1 w-full sm:text-sm border-color14 rounded-md focus:outline-none text-color12" placeholder="Product Brand" />
+                      type="text" className="px-4 py-2 border focus:ring-color1 focus:border-color1 w-full sm:text-sm border-color14 rounded-md focus:outline-none text-color5" placeholder="Product Brand" />
                     </div>
                     <div className="flex flex-col">
                       <label className="leading-loose">Product Category </label>
-                      <input defaultValue={category} onChange={(e)=>{product.categories = [e.target.value,brandd]; setProduct({...product})}} type="text" className="px-4 py-2 border focus:ring-color1 focus:border-color1 w-full sm:text-sm border-color14 rounded-md focus:outline-none text-color12" placeholder="(Lip, Eye, Face)" />
+                      <input defaultValue={category} onChange={(e)=>{product.categories = [e.target.value,brandd]; setProduct({...product})}} type="text" className="px-4 py-2 border focus:ring-color1 focus:border-color1 w-full sm:text-sm border-color14 rounded-md focus:outline-none text-color5" placeholder="(Lip, Eye, Face)" />
                     </div>
                     <div className="flex flex-col">
                       <label className="leading-loose">Product Price</label>
-                      <input defaultValue={price} onChange={(e)=>{product.price = e.target.value; setProduct({...product})}} type="text" className="px-4 py-2 border focus:ring-color1 focus:border-color1 w-full sm:text-sm border-color14 rounded-md focus:outline-none text-color12" placeholder="Product Price" />
+                      <input defaultValue={price} onChange={(e)=>{product.price = e.target.value; setProduct({...product})}} type="text" className="px-4 py-2 border focus:ring-color1 focus:border-color1 w-full sm:text-sm border-color14 rounded-md focus:outline-none text-color5" placeholder="Product Price" />
                     </div>
                     <div className="flex flex-col">
                       <label className="leading-loose">Product Image URL</label>
                       <input defaultValue={img}
                       onChange={(e)=>{product.image_key = e.target.value; setProduct({...product})}}
-                      type="text" className="px-4 py-2 border focus:ring-color1 focus:border-color1 w-full sm:text-sm border-color14 rounded-md focus:outline-none text-color12" placeholder="https://img.com/...." />
+                      type="text" className="px-4 py-2 border focus:ring-color1 focus:border-color1 w-full sm:text-sm border-color14 rounded-md focus:outline-none text-color5" placeholder="https://img.com/...." />
                     </div>
                     <div className="flex items-center space-x-4">
                     </div>
@@ -208,9 +209,10 @@ const addProduct = async () => {
           </div>
           </div>
           </div>
-          </form> 
-          </div>      
-          </div>  
+          </> : <div> Sorry Should be Login {navigate("/login")} </div>
+        
+    }
+            </div>       
     )
 }
 

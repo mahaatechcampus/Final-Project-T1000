@@ -1,19 +1,19 @@
 import {BrowserRouter as Router,Routes,Route} from "react-router-dom";
 import Navbar from './Component/Navbar'
-import Success from './Component/Success'
+import Success from './Pages/Success'
 import Home from "./Pages/Home";
 import ProductsList from "./Pages/ProductsList"
 import Product from "./Pages/Product"
-import Cart from "./Component/Cart"
-import Login from "./Component/Login"
-import Register from "./Component/Register"
+import Cart from "./Pages/Cart"
+import Login from "./Pages/Login"
+import Register from "./Pages/Register"
 import Account from "./Pages/Account"
 import Wishlist from "./Pages/Wishlist"
 import Search from "./Component/Search"
-import Dashboard from "./Admin/Dashboard"
 import ProductsAdmin from "./Admin/ProductsAdmin";
 import AddProductAdmin from "./Admin/AddProductAdmin";
 import Editproduct from "./Admin/Editproduct";
+import ProfileInfo from "./Admin/ProfileInfo";
 
 function App() {
   
@@ -32,12 +32,10 @@ function App() {
         <Route path="/account" element={<Account />}/> 
         <Route path="/wishlist" element={<Wishlist />}/> 
         <Route path="/success" element= {<Success/>} />
-        <Route path="/dashboard" element= {<Dashboard />}/>
+        <Route path="/dashboard" element= {<ProfileInfo/>}/>
         <Route path="/dashboard/products"element= {<ProductsAdmin />}/>
         <Route path="/dashboard/products/add"element= {<AddProductAdmin />}/>
         <Route path="/dashboard/products/:id"element= {<Editproduct />}/>
-
-
       </Routes>
     </Router>
   );

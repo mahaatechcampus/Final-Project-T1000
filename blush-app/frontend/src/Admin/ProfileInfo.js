@@ -3,10 +3,8 @@ import {Link} from "react-router-dom";
 import {useSelector,useDispatch} from "react-redux"
 import { useNavigate } from 'react-router';
 import { logoutuser } from '../redux/userRedux';
-import ProductsAdmin from './ProductsAdmin';
 
-
-function Dashboard() {
+function ProfileInfo() {
     const user = useSelector((state) => state.user.currentUser);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -18,12 +16,10 @@ function Dashboard() {
 };
 
     return (
-       
-        <div> 
+    
+        <div className="container grid grid-cols-12 items-start gap-6 pt-4 pb-16">
             {user ?
-            <>
-            {/* account wrapper */}
-            <div className="container grid grid-cols-12 items-start gap-6 pt-4 pb-16">
+            <> 
                 {/* sidebar */}
                 <div className="col-span-3">
                     {/* account profile */}
@@ -138,11 +134,8 @@ function Dashboard() {
 
                     </div>
                 </div>
-        
             {/* sidebarend */}
-
-            {/* profileInfo */}
-            <div className="col-span-9 grid grid-cols-3 gap-4">
+    <div className="col-span-9 grid grid-cols-3 gap-4">
                 {/* single card */}
                 <div className="shadow rounded bg-color11 px-4 pt-6 pb-8">
                     <div className="flex justify-between items-center mb-4">
@@ -155,18 +148,15 @@ function Dashboard() {
                     </div>
                 </div>
                 {/* end single card */}
-
             </div>
-            {/* end profile info */}
-        </div>
+            </> : <div> Sorry Should be Login {navigate("/login")} </div>
         
-        </> : <div> Sorry Should be Login {navigate("/login")} </div>
-        
-        }
+    }
 
-        </div>
-    )
-}
+    </div>
 
-
-export default Dashboard
+            
+            )
+            }
+            
+export default ProfileInfo
