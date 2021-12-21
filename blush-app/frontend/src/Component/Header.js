@@ -24,7 +24,7 @@ function Header() {
 
             
         {/* header background */}
-        <div className=" bg-cover w-full bg-no-repeat bg-center py-32 px-14" style={{backgroundImage:"url(header.png)" }}>
+        <div className=" bg-cover  bg-no-repeat bg-center py-32 " style={{backgroundImage:"url(header.png)" }}>
             <div className="container">
                 <h1 className="text-5xl text-color3 font-medium font-sans mb-5 capitalize"> Best Beauty Cosmetics</h1>
                 {/* <h1 className="text-5xl text-color3 font-medium mb-4 capitalize"> Meet your latest obsessions </h1> */}

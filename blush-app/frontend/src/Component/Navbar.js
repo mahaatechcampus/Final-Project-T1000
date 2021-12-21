@@ -36,7 +36,7 @@ const navigate = useNavigate();
                 </svg></span>
                 <input type="text" 
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full border border-color1 border-r-0 pl-12 py-3 pr-3 rounded-l-md focus:outline-none" placeholder="Search"/>
+                className="w-full border border-color1 border-r-0 pl-12 py-3 pr-3 rounded-l-md focus:outline-none text-color3" placeholder="Search"/>
                 <Link to={`/search/${searchTerm}`} className=" block py-3  text-center bg-color1 border border-color1  text-color11 px-8 rounded-r-md hover:bg-transparent hover:text-color1 transition">Search</Link>
                 </div>
                 

@@ -6,6 +6,7 @@ import axios from "axios";
 import { useNavigate } from 'react-router';
 import { cartEmptyifPayed } from '../redux/cartRedux';
 import { deleteProduct} from '../redux/cartRedux';
+import Swal from "sweetalert2";
 
 function Cart() {
     const KEY = 'pk_test_51K4QRoFYQSGZ6LgGFutNv3mcj4mNmIdz9nRX1v74QY1pY2quazCAe4NcurFP5vqrgb6pL6ztGZI00U2EXRvEGzie00Hs063D2O';
@@ -28,13 +29,28 @@ console.log(cart)
                     tokenId:stripeToken.id,
                     amount: (cart.total*3.75)*100,  
                 });
-                navigate("/success", {state: {
-                stripeData: res.data,
-                products: cart, }});
+                Swal.fire({
+                  title: "Successfull! Your order is being prepared",
+                  text: "Redirecting to Homepage",
+                  icon: "success",
+                  showCancelButton: false,
+                  showConfirmButton: false,
+                  timer: 2200,
+                  timerProgressBar: true,
+                  didClose: () => {
+                  navigate("/");
+                  },
+                });
+                res.data  && dispatch(cartEmptyifPayed());
+
+                // navigate("/success", {
+                // stripeData: res.data,
+                // products: cart, });
 
                 } catch (error) {}
         }
         stripeToken && makeRequest();
+        
     },[stripeToken,cart.total,navigate])
 
 

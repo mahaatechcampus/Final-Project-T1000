@@ -87,7 +87,7 @@ function Login() {
             >
               Login
             </button>
-            {!error && <p className="my-12  text-lg font-display font-semibold text-center text-color9" > Something Went Wrong ! </p>}
+            {/* {!error && <p className="my-12  text-lg font-display font-semibold text-center text-color9" > Something Went Wrong ! </p>} */}
           </div>
         </form>
         <div className="my-12  text-sm font-display font-semibold text-color3 text-center">

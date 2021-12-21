@@ -32,7 +32,7 @@ function App() {
         <Route path="/search/:searchTerm" element={<Search/>}/>
         <Route path="/account" element={<Account />}/> 
         <Route path="/wishlist" element={<Wishlist />}/> 
-        <Route path="/success" element= {<Success/>} />
+        {/* <Route path="/success" element= {<Success/>} /> */}
         <Route path="/dashboard" element= {<ProfileInfo/>}/>
         <Route path="/dashboard/products"element= {<ProductsAdmin />}/>
         <Route path="/dashboard/products/add"element= {<AddProductAdmin />}/>
