@@ -14,6 +14,7 @@ import ProductsAdmin from "./Admin/ProductsAdmin";
 import AddProductAdmin from "./Admin/AddProductAdmin";
 import Editproduct from "./Admin/Editproduct";
 import ProfileInfo from "./Admin/ProfileInfo";
+import Footer from "./Component/Footer"
 
 function App() {
   
@@ -37,6 +38,7 @@ function App() {
         <Route path="/dashboard/products/add"element= {<AddProductAdmin />}/>
         <Route path="/dashboard/products/:id"element= {<Editproduct />}/>
       </Routes>
+      <Footer/>
     </Router>
   );
 }
