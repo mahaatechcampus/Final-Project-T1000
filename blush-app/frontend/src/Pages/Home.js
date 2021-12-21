@@ -12,8 +12,10 @@ function Home() {
             <CategoryItem/>
             <NewArrival/>
             <AdSection/>
-        </div>
-    )
+            </div>
+       
+ 
+    );
 }
 
 export default Home;

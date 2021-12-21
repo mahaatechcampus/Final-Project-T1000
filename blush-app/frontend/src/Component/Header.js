@@ -1,18 +1,37 @@
-import React from 'react';
+import react, { useState } from "react";
 import {Link} from "react-router-dom";
 function Header() {
+    const [menu, setMenu] = useState(false);
     return (
         <>
+{/* <div>
+ <section>
+            <div class="w-full relative pb-6 px-6 xl:px-0">
+                <div class="absolute w-full inset-0 h-full object-cover object-center bg-color8" ></div>
+                <div class="pt-24 lg:flex items-center relative z-10 container mx-auto">
+                    <div class="w-full lg:w-1/2 h-full lg:pr-10 xl:pr-0">
+                        <img tabindex="0" role="img" aria-label="people smiling" class="mx-auto" src="https://cdn.tuk.dev/assets/templates/weCare/hero2-left.png"  alt="people smiling"/>
+                    </div>
+                    <div  role="contentinfo"  class="w-full lg:w-1/2 h-full">
+                        <p tabindex="0" class="text-indigo-700 uppercase text-2xl mb-4">Qusique Tincidun sapien</p>
+                        <h1 tabindex="0" class="text-indigo-700 text-4xl lg:text-6xl font-black mb-8">All natural ingredients</h1>
+                        <p tabindex="0" class="text-gray-800 font-regular mb-8">COMBINING SCIENCE WITH BEAUTY. L'Oreal Paris offerincare products is developed and rigorously tested with leading scientists. Indulge yourself in a luxurious and sensorial skincare experience. Cutting-edge innovations, proven by Science.</p>
+ 
+                    </div>
+                </div>
+            </div>
+        </section> */}
+
+            
         {/* header background */}
-        <div className="bg-cover bg-no-repeat bg-center py-36" style={{backgroundImage:"url(https://images.unsplash.com/photo-1531646317777-0619c7c5d1d3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80)" }}>
+        <div className=" bg-cover w-full bg-no-repeat bg-center py-32 px-14" style={{backgroundImage:"url(header.png)" }}>
             <div className="container">
-                <h1 className="text-6xl text-color11 font-medium mb-4 capitalize">Best Collection ... </h1>
-                <p>
-                    ...........................................
-                </p>
+                <h1 className="text-5xl text-color3 font-medium font-sans mb-5 capitalize"> Best Beauty Cosmetics</h1>
+                {/* <h1 className="text-5xl text-color3 font-medium mb-4 capitalize"> Meet your latest obsessions </h1> */}
+             
             </div>
             <div className="mt-12">
-                <Link to="" className="bg-color5 border border-color5 text-color11  ml-32 px-8 py-3 font-medium rounded-md hover:bg-transparent hover:text-color5">
+                <Link to="/products" className="bg-color5 border border-color5 text-color11  ml-32 px-8 py-3 font-medium rounded-md hover:bg-transparent hover:text-color5">
                     SHOPE NOW
                 </Link>
             </div>
