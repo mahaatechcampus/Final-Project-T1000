@@ -7,7 +7,7 @@ const Toast = MySwal.mixin({
   toast: true,
   position: 'top-end',
   showConfirmButton: false,
-  timer: 1000,
+  timer: 1300,
   timerProgressBar: true,
   didOpen: (toast) => {
     toast.addEventListener('mouseenter', MySwal.stopTimer)
@@ -48,6 +48,10 @@ const userSlice = createSlice({
         signup:(initialState,action)=>{
             initialState.isFetching = false;
             initialState.currentUser = action.payload;
+            Toast.fire({
+                icon: "success",
+                title: "Signed up successfully",
+              });
         },
     },
 });

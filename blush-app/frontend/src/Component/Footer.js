@@ -92,7 +92,7 @@ function Footer() {
                       to="/"
                       className="text-color6 transition-colors duration-300 hover:text-color1"
                     >
-                     Terms & Conditions
+                    Terms & Conditions
                     </Link>
                   </li>
                   <li>
@@ -143,7 +143,7 @@ function Footer() {
               </form>
               <p className="mt-4 text-sm text-color14">
               To keep up to date with the latest arrivals,
-               direct to your inbox..
+              direct to your inbox..
               </p>
             </div>
           </div>

@@ -48,16 +48,20 @@ function Login() {
               xl:text-bold"
       >
         Sign In
-      </h2>
+      </h2> 
+       
       <div className="mt-12">
 
-        <form >
+      <form >
           <div className="container">
             <div className="text-sm font-bold text-color3 tracking-wide">
               Username
             </div>
+          
             <input
               className="w-full text-lg py-2 border-b border-color12 text-color5 focus:outline-none focus:border-color2"
+              type="text"
+              required
               onChange={(e)=> setUsername(e.target.value)}
               placeholder="Enter your username"
             />
@@ -71,6 +75,7 @@ function Login() {
             </div>
             <input
               className="w-full text-lg py-2 text-color5 border-b  border-color12 focus:outline-none focus:border-color2"
+              required
               onChange={(e)=> setPassword(e.target.value)}
               type="password"
               placeholder="Enter your password"
@@ -82,14 +87,16 @@ function Login() {
             className="bg-color1 border border-color1 text-color11 p-4 w-full rounded-md tracking-wide
             font-medium text-2xl font-display focus:outline-none focus:shadow-outline hover:bg-transparent  hover:text-color1
             shadow-lg "
+            type="submit"
             onClick={(e)=>handleClick(e)}
             disabled={isFetching}
             >
               Login
             </button>
+            
             {/* {!error && <p className="my-12  text-lg font-display font-semibold text-center text-color9" > Something Went Wrong ! </p>} */}
           </div>
-        </form>
+       </form>
         <div className="my-12  text-sm font-display font-semibold text-color3 text-center">
           Don't have an account ?{" "}
           <Link to="/register" className="cursor-pointer text-indigo-600 hover:text-color1">

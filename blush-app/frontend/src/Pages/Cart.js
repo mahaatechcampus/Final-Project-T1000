@@ -107,11 +107,11 @@ console.log(cart)
                   <div className="flex flex-col justify-between ml-4 flex-grow">
                     <span className="font-bold text-color3 text-sm">{product.name}</span>
                     <span className="text-color1 text-xs">{product.brand[0].name}</span>
-                    {/* <Link to="#" onClick={() => deleteProduct(product)} className="font-medium hover:text-color10  text-color14 text-xs">Remove</Link> */}
+                    {/* <Link to="#" onClick={() => deleteProduct(product)} className="font-medium hover:text-color10  text-color14 text-xs">Remove all from Cart </Link> */}
                   </div>
                 </div>
                 <div className="flex justify-center w-1/5">
-                <svg onClick={()=> handleQuantity("dec",product)} className="fill-current text-color14 w-3 cursor-pointer" viewBox="0 0 448 512"><path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/>
+                <svg onClick={()=> handleQuantity("dec",product.quantity)} className="fill-current text-color14 w-3 cursor-pointer" viewBox="0 0 448 512"><path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/>
                   </svg>
       
                   <input className="mx-2 text-color3 border  border-color12 text-center w-8" type="text" value={product.quantity}/>
@@ -124,7 +124,11 @@ console.log(cart)
                 <span className="text-center text-color3 w-1/5 font-medium text-sm">{product.price * product.quantity} SAR</span>
               </div>
             ))}
+
       
+            {cart.quantity > 0 ?<Link to="#" onClick={() => dispatch(cartEmptyifPayed())} className="flex font-medium  hover:text-color10  text-color14 text-xs mt-10  "> <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 fill-current mr-2 " viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
+                </svg>Remove all from Cart </Link>:<></>}
               <Link to="/" className="flex font-semibold text-color10 text-sm mt-10">
             
                 <svg className="fill-current mr-2 text-color10 w-4" viewBox="0 0 448 512"><path d="M134.059 296H436c6.627 0 12-5.373 12-12v-56c0-6.627-5.373-12-12-12H134.059v-46.059c0-21.382-25.851-32.09-40.971-16.971L7.029 239.029c-9.373 9.373-9.373 24.569 0 33.941l86.059 86.059c15.119 15.119 40.971 4.411 40.971-16.971V296z"/></svg>
