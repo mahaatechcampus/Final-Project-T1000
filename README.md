@@ -15,6 +15,7 @@
 - **Logout:** As a user I can logout from the platform.
 - **See all Products** As a user I can see all the products in Products page.
 - **See Categories** As a user I can Select on of the categories in the app.
+- **Search for a specific product** As a user I can search for any product in the store app.
 - **Filter** As a user I can filtering the products in the app.
 - **Sorting** As a user I can Sorting  the products in the app.
 - **See single product page** As a user I can see all information for selected product
