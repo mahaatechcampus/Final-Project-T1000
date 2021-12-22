@@ -241,7 +241,7 @@ Wishlist model
 
 ### Slides
 
-[Slides Link](http://slides.com/)
+[Slides Link](https://kauksa-my.sharepoint.com/:p:/g/personal/1422697_stu_kau_edu_sa/ERuDZ-HftLxPlusc9hQTS64Ba727GTz0P3MQCSBvEl2YOA?e=sdidwy)
 
 ### Wireframe
 
