@@ -22,7 +22,7 @@
 - **Add product to the wishlist** As a user I can add products to my wishlist page
 - **Control cart page** As a user I can control cart page => delete, update, add product
 - **Checkout** As a user i can checkout and payment.
--  **Live Chatting ** As a user i can chatting with support team any time.
+-  **Live Chatting** As a user i can chatting with support team any time.
 
 
 ## User features
