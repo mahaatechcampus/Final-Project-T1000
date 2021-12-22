@@ -1,6 +1,6 @@
 # Blush Store
 
-# 	<img src="/Users/maha/Final Project - T1000/Blush logo.png" alt="Blush logo" style="zoom:50%;" />
+# 	<img src="https://github.com/mahaatechcampus/Final-Project-T1000/blob/main/Blush%20logo.png" alt="Blush logo" style="zoom:50%;" />
 
 ## Description
 
