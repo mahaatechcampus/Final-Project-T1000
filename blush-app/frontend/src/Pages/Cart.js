@@ -13,6 +13,7 @@ function Cart() {
     const cart = useSelector(state => state.cart);
     const user = useSelector(state => state.user.currentUser);
     const [stripeToken, setStripeToken] = useState(null)
+    const [quantityofProduct,setquantityofProduct] = useState()
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -21,6 +22,9 @@ console.log(cart)
     const onToken = (token)=>{
         setStripeToken(token);
     };
+    useEffect(()=>{
+
+    },[cart.products])
 
     useEffect(()=>{
         const makeRequest = async () => {
@@ -55,13 +59,16 @@ console.log(cart)
 
 
     const handleQuantity = (type,quantity) => {
+      
         if(type === "dec" &&  quantity > 1 ){
-            quantity +=1 
+          quantity+=1;
+             
         }
         else{
-            quantity -=1;
+          quantity-=1;
         }
     }
+ 
     useEffect(() =>{
       !user  && dispatch(cartEmptyifPayed());
 
@@ -111,7 +118,7 @@ console.log(cart)
                   </div>
                 </div>
                 <div className="flex justify-center w-1/5">
-                <svg onClick={()=> handleQuantity("dec",product.quantity)} className="fill-current text-color14 w-3 cursor-pointer" viewBox="0 0 448 512"><path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/>
+                  <svg onClick={()=> handleQuantity("dec",product.quantity)} className="fill-current text-color14 w-3 cursor-pointer" viewBox="0 0 448 512"><path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/>
                   </svg>
       
                   <input className="mx-2 text-color3 border  border-color12 text-center w-8" type="text" value={product.quantity}/>

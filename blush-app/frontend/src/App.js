@@ -15,6 +15,7 @@ import AddProductAdmin from "./Admin/AddProductAdmin";
 import Editproduct from "./Admin/Editproduct";
 import ProfileInfo from "./Admin/ProfileInfo";
 import Footer from "./Component/Footer"
+import Error404 from "./Pages/Error404";
 
 function App() {
   
@@ -37,6 +38,7 @@ function App() {
         <Route path="/dashboard/products"element= {<ProductsAdmin />}/>
         <Route path="/dashboard/products/add"element= {<AddProductAdmin />}/>
         <Route path="/dashboard/products/:id"element= {<Editproduct />}/>
+        <Route path="*"element= {<Error404 />}/>
       </Routes>
       <Footer/>
     </Router>

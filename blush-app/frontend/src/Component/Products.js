@@ -25,7 +25,6 @@ function Products({category,filter,sort}) {
     //fetch by category & filter 
 
     useEffect(() => {
-
     category && setFilteredProducts(
         products.filter(pro => pro.categories[1] === filter)
         )
