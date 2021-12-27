@@ -5,11 +5,14 @@ import { useNavigate,useParams } from 'react-router';
 import {userRequest} from './requestMethode';
 import axios from "axios";
 import { logoutuser } from '../redux/userRedux';
+import Swal from "sweetalert2";
+
 
 function AddProductAdmin() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.currentUser);
+  const [openModal,setOpenmodal] = useState(false);
   const [brandd,setBrand] = useState("");
   const [img,setImg] = useState("");
   const [name,setName] = useState("");
@@ -27,7 +30,21 @@ const addProduct = async () => {
   console.log(product)
   try {
     const res = await userRequest.post(`/products`, product);
-  console.log(res)
+  console.log(res)  
+  setOpenmodal(false);
+  Swal.fire({
+    title: "Product added successfully",
+    text: "Redirecting to Products",
+    icon: "success",
+    showCancelButton: false,
+    showConfirmButton: false,
+    timer: 2200,
+    timerProgressBar: true,
+    didClose: () => {
+    navigate("/dashboard/products");
+    },
+  });
+
     // products.push(product);
     }
     
@@ -50,7 +67,7 @@ const handleClick = ()=>{
                     <div className="px-4 py-3 shadow flex items-center gap-4">
                         <div className="flex-shrink-0">
                             <img src="https://media.istockphoto.com/vectors/default-profile-picture-avatar-photo-placeholder-vector-illustration-vector-id1214428300?k=20&m=1214428300&s=170667a&w=0&h=NPyJe8rXdOnLZDSSCdLvLWOtIeC9HjbWFIx8wg5nIks=" 
-                            className="rounded-full w-14 h-14 border border-color1 p-1 object-cover "
+                            className="rounded-full w-14 h-14 border border-color10 p-1 object-cover "
                             alt="avatar"/>
                         </div>
 
@@ -159,13 +176,80 @@ const handleClick = ()=>{
                     </div>
                 </div>
             {/* sidebarend */}
-            <div className="col-span-9">
+           {/* modal */}
+
+           {openModal && 
+        <div>
+            <div className="py-12 bg-color6   transition duration-150 ease-in-out z-10 absolute top-0 right-0 bottom-0 left-0" id="modal">
+                <div role="alert" className="container mx-auto w-11/12 md:w-2/3 max-w-lg">
+                    <div className="relative py-8 px-5 md:px-10 bg-color11 shadow-md rounded border border-color14">
+                        <div className="w-full flex justify-start text-color1 mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-24 w-24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z" />
+                        </svg>
+                        </div>
+                        <h1 className="text-color3 font-lg font-bold tracking-normal leading-tight mb-4">Enter Product Details</h1>
+                        <label  className="text-color3 text-sm font-bold leading-tight tracking-normal">
+                            Product Name
+                        </label>
+                        <input defaultValue={name} onChange={(e)=>{product.name = e.target.value; setProduct({...product})}} className="mb-5 mt-2 text-color5 focus:outline-none focus:border focus:border-color10 font-normal w-full h-10 flex items-center pl-3 text-sm border-color14 rounded border" placeholder="NYX | Suede Matte Lipstick ...." />
+                        <label  className="text-color3 text-sm font-bold leading-tight tracking-normal">
+                            Product Brand
+                        </label>
+                        <input defaultValue={brandd} onChange={(e)=>{product.brand = [{name:e.target.value,key:e.target.value}]; setProduct({...product})}}
+                        type="text" className="mb-5 mt-2 text-color5 focus:outline-none focus:border focus:border-color10 font-normal w-full h-10 flex items-center pl-3 text-sm border-color14 rounded border" placeholder="NYX | Suede Matte Lipstick ...." />
+
+                        <label  className="text-color3 text-sm font-bold leading-tight tracking-normal">
+                            Product Category
+                        </label>
+                        <input defaultValue={category} onChange={(e)=>{product.categories = [e.target.value,category,product.brand]; setProduct({...product})}} className="mb-5 mt-2 text-color5 focus:outline-none focus:border focus:border-color10 font-normal w-full h-10 flex items-center pl-3 text-sm border-color14 rounded border" 
+                        placeholder="(eye, face, lip)" />
+                        <label className="text-color3 text-sm font-bold leading-tight tracking-normal">
+                            Product Price
+                        </label>
+                        <input defaultValue={price} onChange={(e)=>{product.price = e.target.value; setProduct({...product})}} 
+                        className="mb-5 mt-2 text-color5 focus:outline-none focus:border focus:border-color10 font-normal w-full h-10 flex items-center pl-3 text-sm border-color14 rounded border" 
+                        placeholder="price" />
+                        <label  className="text-color3 text-sm font-bold leading-tight tracking-normal">
+                            Product Image URL
+                        </label>
+                        <input defaultValue={img}
+                      onChange={(e)=>{product.image_key = e.target.value; setProduct({...product})}} className="mb-5 mt-2 text-color5 focus:outline-none focus:border focus:border-color10 font-normal w-full h-10 flex items-center pl-3 text-sm border-color14 rounded border"
+                      placeholder="https://image.com/...." />
+
+                        <div className="flex items-center justify-start w-full">
+                            <button onClick={()=> addProduct()} className=" text-color11  border border-color10 focus:outline-none transition duration-150 ease-in-out hover:bg-color11 hover:text-color10 bg-color10 rounded  px-8 py-2 text-sm">Add Product</button>
+                            <button onClick={()=> setOpenmodal(false)} className="focus:outline-none ml-3 border border-color12 text-color14 transition duration-150  ease-in-out hover:text-color10  rounded px-8 py-2 text-sm" onclick="modalHandler()">
+                                Cancel
+                            </button>
+                        </div>
+                        <div className="cursor-pointer absolute top-0 right-0 mt-4 mr-5 text-color14 hover:text-color14 transition duration-150 ease-in-out" onclick={setOpenmodal(false)}>
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-label="Close" className="icon icon-tabler icon-tabler-x" width={20} height={20} viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" />
+                                <line x1={18} y1={6} x2={6} y2={18} />
+                                <line x1={6} y1={6} x2={18} y2={18} />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="w-full flex justify-center py-12" id="button">
+                <button className="focus:outline-none mx-auto transition duration-150 ease-in-out hover:bg-indigo-600 bg-color10 rounded color11 px-4 sm:px-8 py-2 text-xs sm:text-sm" onclick="modalHandler(true)">
+                    Open Modal
+                </button>
+            </div>
+        </div>
+}
+
+{/*  */}
+
+            {/* <div className="col-span-9">
             <div className=" min-h-screen py-6 flex flex-col justify-center sm:py-12">
           <div className="relative py-3 sm:max-w-xl sm:mx-auto">
             <div className="relative px-24 py-10 bg-color11 mx-8 md:mx-0 shadow rounded-md sm:p-10">
               <div className="max-w-md mx-auto">
                 <div className="flex items-center space-x-5">
-                  <div className="block pl-2 font-semibold text-xl self-start text-color1">
+                  <div className="block pl-2 font-semibold text-xl self-start text-color10">
                     <h2 className="leading-relaxed">Add New Product</h2>
                   </div>
                 </div>
@@ -173,26 +257,26 @@ const handleClick = ()=>{
                   <div className="py-8 text-base leading-6 space-y-4 text-color14 sm:text-lg sm:leading-7">
                     <div className="flex flex-col">
                       <label className="leading-loose">Product Name</label>
-                      <input defaultValue={name} onChange={(e)=>{product.name = e.target.value; setProduct({...product})}} type="text" className="px-4 py-2 border focus:ring-color1 focus:border-color1 w-full sm:text-sm border-color14 rounded-md focus:outline-none text-color5" placeholder="Product Name" />
+                      <input defaultValue={name} onChange={(e)=>{product.name = e.target.value; setProduct({...product})}} type="text" className="px-4 py-2 border focus:ring-color10 focus:border-color10 w-full sm:text-sm border-color14 rounded-md focus:outline-none text-color5" placeholder="Product Name" />
                     </div>
                     <div className="flex flex-col">
                       <label className="leading-loose">Product Brand</label>
                       <input defaultValue={brandd} onChange={(e)=>{product.brand = [{name:e.target.value,key:e.target.value}]; setProduct({...product})}}
-                      type="text" className="px-4 py-2 border focus:ring-color1 focus:border-color1 w-full sm:text-sm border-color14 rounded-md focus:outline-none text-color5" placeholder="Product Brand" />
+                      type="text" className="px-4 py-2 border focus:ring-color10 focus:border-color10 w-full sm:text-sm border-color14 rounded-md focus:outline-none text-color5" placeholder="Product Brand" />
                     </div>
                     <div className="flex flex-col">
                       <label className="leading-loose">Product Category </label>
-                      <input defaultValue={category} onChange={(e)=>{product.categories = [e.target.value,brandd]; setProduct({...product})}} type="text" className="px-4 py-2 border focus:ring-color1 focus:border-color1 w-full sm:text-sm border-color14 rounded-md focus:outline-none text-color5" placeholder="(Lip, Eye, Face)" />
+                      <input defaultValue={category} onChange={(e)=>{product.categories = [e.target.value,category,product.brand]; setProduct({...product})}} type="text" className="px-4 py-2 border focus:ring-color10 focus:border-color10 w-full sm:text-sm border-color14 rounded-md focus:outline-none text-color5" placeholder="(Lip, Eye, Face)" />
                     </div>
                     <div className="flex flex-col">
                       <label className="leading-loose">Product Price</label>
-                      <input defaultValue={price} onChange={(e)=>{product.price = e.target.value; setProduct({...product})}} type="text" className="px-4 py-2 border focus:ring-color1 focus:border-color1 w-full sm:text-sm border-color14 rounded-md focus:outline-none text-color5" placeholder="Product Price" />
+                      <input defaultValue={price} onChange={(e)=>{product.price = e.target.value; setProduct({...product})}} type="text" className="px-4 py-2 border focus:ring-color10 focus:border-color10 w-full sm:text-sm border-color14 rounded-md focus:outline-none text-color5" placeholder="Product Price" />
                     </div>
                     <div className="flex flex-col">
                       <label className="leading-loose">Product Image URL</label>
                       <input defaultValue={img}
                       onChange={(e)=>{product.image_key = e.target.value; setProduct({...product})}}
-                      type="text" className="px-4 py-2 border focus:ring-color1 focus:border-color1 w-full sm:text-sm border-color14 rounded-md focus:outline-none text-color5" placeholder="https://img.com/...." />
+                      type="text" className="px-4 py-2 border focus:ring-color10 focus:border-color10 w-full sm:text-sm border-color14 rounded-md focus:outline-none text-color5" placeholder="https://img.com/...." />
                     </div>
                     <div className="flex items-center space-x-4">
                     </div>
@@ -208,7 +292,7 @@ const handleClick = ()=>{
             </div>
           </div>
           </div>
-          </div>
+          </div> */}
           </> : <div> Sorry Should be Login {navigate("/login")} </div>
         
     }

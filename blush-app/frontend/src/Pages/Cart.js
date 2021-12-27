@@ -169,7 +169,7 @@ console.log(cart)
                 billingAddress
                 shippingAddress
                 description={`Your Total is ${cart.total} SAR`}
-                amount={(cart.total*3.75)*100}
+                amount={((cart.total)/3.75)*100}
                 token={onToken}
                 stripeKey={KEY}
                 >

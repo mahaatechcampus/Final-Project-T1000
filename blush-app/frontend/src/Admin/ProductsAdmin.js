@@ -6,12 +6,51 @@ import {addProduct} from "../redux/cartRedux";
 import { useNavigate } from 'react-router';
 import axios from "axios";
 import {userRequest} from './requestMethode';
+import Swal from "sweetalert2";
 
 function ProductsAdmin() {
     const user = useSelector((state) => state.user.currentUser);
     const [products,setProducts] = useState([]);
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const [openModal,setOpenmodal] = useState(false);
+    const [brandd,setBrand] = useState("");
+    const [img,setImg] = useState("");
+    const [name,setName] = useState("");
+    const [price,setPrice] = useState("");
+    const [category,setCategory] = useState("");
+    const [product,setProduct] = useState({
+      brand: [{name: brandd, key: brandd }],
+      image_key : img,
+      name : name,
+      price : price,
+      categories:[category,brandd]
+    })
+  
+  const addProduct = async () => {
+    console.log(product)
+    try {
+      const res = await userRequest.post(`/products`, product);
+    console.log(res)  
+    setOpenmodal(false);
+    Swal.fire({
+      title: "Product added successfully",
+      text: "Redirecting to Products",
+      icon: "success",
+      showCancelButton: false,
+      showConfirmButton: false,
+      timer: 2000,
+      timerProgressBar: true,
+    //   didClose: () => {
+    //   navigate("/dashboard/products");
+    //   },
+    });
+  
+      // products.push(product);
+      }
+          
+    catch (error) {}
+};
 
     //logout
     const logout = ()=>{
@@ -46,9 +85,9 @@ function ProductsAdmin() {
 
 
     return (
-
+<div>
         <div className="container grid grid-cols-12 items-start gap-6 pt-4 pb-16">
-           {user ?
+        {user ?
             <>
         {/* sidebar */}
         <div className="col-span-3">
@@ -167,7 +206,7 @@ function ProductsAdmin() {
             {/* sidebarend */}
             {/* sidebarend */}
                 <div className="col-span-9 space-y-4">
-                <Link to="/dashboard/products/add"  className=" flex gap-2 ml-auto w-44 justify-center px-2 py-2  bg-color10 border border-color10 text-color11 font-medium rounded  hover:bg-transparent hover:text-color10 transition"> Add New product</Link>
+                <Link to="" onClick={()=>setOpenmodal(true)} className=" flex gap-2 ml-auto w-44 justify-center px-2 py-2  bg-color10 border border-color10 text-color11 font-medium rounded  hover:bg-transparent hover:text-color10 transition"> Add New product</Link>
 
                 {/* single product */}
                 {products && products.map((product)=>(
@@ -197,9 +236,68 @@ function ProductsAdmin() {
             </> : <div> Sorry Should be Login {navigate("/login")} </div>
         
     }
+</div>
+{openModal && 
+        <div className="" >
+            <div className=" overflow-x-hidden overflow-y-auto outline-none py-32  bg-color6 bg-opacity-40  transition duration-150 fixed  inset-0 z-50 " id="modal">
+                <div role="alert" className="container mx-auto   w-11/12 md:w-2/3 max-w-lg">
+                    <div className=" py-8 px-5 md:px-10 bg-color11 shadow-md rounded border border-color14">
+                        <div className="w-full flex justify-between text-color1 mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-24 w-24 " fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z" />
+                        </svg>
+                            <svg onClick={()=> setOpenmodal(false)}  xmlns="http://www.w3.org/2000/svg"  aria-label="Close" className="icon icon-tabler icon-tabler-x cursor-pointer text-color14" width={20} height={20} viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" />
+                                <line x1={18} y1={6} x2={6} y2={18} />
+                                <line x1={6} y1={6} x2={18} y2={18} />
+                            </svg>
+                
+                        </div>
+                        <h1 className="text-color3 font-lg font-bold tracking-normal leading-tight mb-4">Enter Product Details</h1>
+                        <label  className="text-color3 text-sm font-bold leading-tight tracking-normal">
+                            Product Name
+                        </label>
+                        <input defaultValue={name} onChange={(e)=>{product.name = e.target.value; setProduct({...product})}} className="mb-5 mt-2 text-color5 focus:outline-none focus:border focus:border-color10 font-normal w-full h-10 flex items-center pl-3 text-sm border-color14 rounded border" placeholder="NYX | Suede Matte Lipstick ...." />
+                        <label  className="text-color3 text-sm font-bold leading-tight tracking-normal">
+                            Product Brand
+                        </label>
+                        <input defaultValue={brandd} onChange={(e)=>{product.brand = [{name:e.target.value,key:e.target.value}]; setProduct({...product})}}
+                        type="text" className="mb-5 mt-2 text-color5 focus:outline-none focus:border focus:border-color10 font-normal w-full h-10 flex items-center pl-3 text-sm border-color14 rounded border" placeholder="Brand Name" />
 
+                        <label  className="text-color3 text-sm font-bold leading-tight tracking-normal">
+                            Product Category
+                        </label>
+                        <input defaultValue={category} onChange={(e)=>{product.categories = [e.target.value,category,product.brand]; setProduct({...product})}} className="mb-5 mt-2 text-color5 focus:outline-none focus:border focus:border-color10 font-normal w-full h-10 flex items-center pl-3 text-sm border-color14 rounded border" 
+                        placeholder="(eye, face, lip)" />
+                        <label className="text-color3 text-sm font-bold leading-tight tracking-normal">
+                            Product Price
+                        </label>
+                        <input defaultValue={price} onChange={(e)=>{product.price = e.target.value; setProduct({...product})}} 
+                        className="mb-5 mt-2 text-color5 focus:outline-none focus:border focus:border-color10 font-normal w-full h-10 flex items-center pl-3 text-sm border-color14 rounded border" 
+                        placeholder="price" />
+                        <label  className="text-color3 text-sm font-bold leading-tight tracking-normal">
+                            Product Image URL
+                        </label>
+                        <input defaultValue={img}
+                        onChange={(e)=>{product.image_key = e.target.value; setProduct({...product})}} className="mb-5 mt-2 text-color5 focus:outline-none focus:border focus:border-color10 font-normal w-full h-10 flex items-center pl-3 text-sm border-color14 rounded border"
+                        placeholder="https://image.com/...." />
+
+                        <div className="flex items-center justify-start w-full">
+                            <button onClick={()=> addProduct()} className=" text-color11  border border-color10 focus:outline-none transition duration-150 ease-in-out hover:bg-color11 hover:text-color10 bg-color10 rounded  px-8 py-2 text-sm">Add Product</button>
+                            <button onClick={()=> setOpenmodal(false)} className="focus:outline-none ml-3 border border-color12 text-color14 transition duration-150  ease-in-out hover:text-color10  rounded px-8 py-2 text-sm">
+                                Cancel
+                            </button>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            
         </div>
-      
+}
+
+        
+        </div>
     )
 }
 
