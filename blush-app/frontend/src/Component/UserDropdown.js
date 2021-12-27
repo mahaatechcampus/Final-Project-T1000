@@ -59,14 +59,15 @@ export default function UserDropdown() {
           <div className="py-1">
             <Menu.Item>
               {({ active }) => (
+               
                 <Link
-                  to="/account"
+                to = {user.user.isAdmin?  "/dashboard" : "/account" }
                   className={classNames(
                     active ? "bg-color8" : " text-color14",
                     "block w-full text-left px-4 py-2 text-sm"
                   )}
                 >
-                  Account
+                {user.user.isAdmin?  "Dashboard" : "Account" }
                 </Link>
               )}
             </Menu.Item>
