@@ -39,9 +39,9 @@ const cartSlice = createSlice({
             initialState.total = 0;
         },
         deleteProduct: (initialState, action) => {
-            initialState.products.splice(initialState.products.findIndex((item)=> item._id === action.product._id),1);
+            initialState.products.splice(initialState.products.findIndex((item)=> item._id === action.payload._id),1);
             initialState.quantity -=1;
-            initialState.total -= action.product.price
+            initialState.total -= action.payload.price
 
         }
 },
