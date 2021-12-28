@@ -5,6 +5,7 @@ import {addProduct} from "../redux/cartRedux";
 import {addProductWish} from "../redux/wishlistRedux";
 import {useSelector,useDispatch} from "react-redux"
 import { useNavigate } from 'react-router';
+import Swal from "sweetalert2";
 
 
 function Products({category,filter,sort}) {
@@ -71,15 +72,36 @@ function Products({category,filter,sort}) {
     //     },[id])
 
     const handleAddToWish = (item)=>{
-        user && dispatch(
-            addProductWish({...item})
-            ) 
+        user ? dispatch(addProductWish({...item}))
+            :  Swal.fire({
+                title: "You must be logged in",
+                text: "Redirecting to Login Page",
+                icon: "warning",
+                showCancelButton: false,
+                showConfirmButton: false,
+                timer: 2200,
+                timerProgressBar: true,
+                didClose: () => {
+                    navigate("/login");}
+                });
+
         };
 
     const handleAddToCart = (item)=>{
-            user && dispatch(
+            user ? dispatch(
             addProduct({...item,quantity, price:item.price * quantity})
-                ) 
+                ):
+                Swal.fire({
+                    title: "You must be logged in",
+                    text: "Redirecting to Login Page",
+                    icon: "warning",
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                    timer: 2200,
+                    timerProgressBar: true,
+                    didClose: () => {
+                        navigate("/login");}
+                    }); 
             };    
 
 

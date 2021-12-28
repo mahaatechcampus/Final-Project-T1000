@@ -17,17 +17,24 @@ const Toast = MySwal.mixin({
 const wishlistSlice = createSlice({
     name : "wishlist",
     initialState :{
-        products: [{}],
+        products: [],
         quantity:0,
     },
     reducers:{
         addProductWish:(initialState,action)=>{
+            if(initialState.products.filter(p => p._id === action.payload._id).length > 0){
+                Toast.fire({
+                  icon: "warning",
+                  title: "This product is already in the Wishlist",
+                });
+              }
+              else{
             initialState.quantity += 1;
             initialState.products.push(action.payload);
             Toast.fire({
                 icon: "success",
                 title: "Added to Wishlist Successfully",
-            });
+            });}
         },
         removeProduct:(initialState,action)=>{
             initialState.quantity -= 1;

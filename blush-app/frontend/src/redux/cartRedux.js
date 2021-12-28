@@ -22,15 +22,21 @@ const cartSlice = createSlice({
         total:0, 
     },
     reducers:{
-        addProduct:(initialState,action)=>{ 
+        addProduct:(initialState,action)=> { 
+          if(initialState.products.filter(p => p._id === action.payload._id).length > 0){
+            Toast.fire({
+              icon: "warning",
+              title: "This product is already in the Cart",
+            });
+          }
+          else{
             initialState.quantity += 1;  
             initialState.products.push(action.payload);
             initialState.total += action.payload.price * action.payload.quantity;
-        
             Toast.fire({
                 icon: "success",
                 title: "Added to Cart Successfully",
-              });
+              });}
         },
 
         cartEmptyifPayed:(initialState) =>{
