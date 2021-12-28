@@ -36,8 +36,8 @@ function App() {
         {/* <Route path="/success" element= {<Success/>} /> */}
         <Route path="/dashboard" element= {<ProfileInfo/>}/>
         <Route path="/dashboard/products"element= {<ProductsAdmin />}/>
-        <Route path="/dashboard/products/add"element= {<AddProductAdmin />}/>
-        <Route path="/dashboard/products/:id"element= {<Editproduct />}/>
+        {/* <Route path="/dashboard/products/add"element= {<AddProductAdmin />}/> */}
+        {/* <Route path="/dashboard/products/:id"element= {<Editproduct />}/> */}
         <Route path="*"element= {<Error404 />}/>
       </Routes>
       <Footer/>

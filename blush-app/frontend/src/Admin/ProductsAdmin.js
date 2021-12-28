@@ -8,7 +8,7 @@ import axios from "axios";
 import {userRequest} from './requestMethode';
 import Swal from "sweetalert2";
 
-function ProductsAdmin() {
+    function ProductsAdmin() {
     const productsRef = createRef(null);
 
     const user = useSelector((state) => state.user.currentUser);
@@ -16,26 +16,57 @@ function ProductsAdmin() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [openModal,setOpenmodal] = useState(false);
+    const [openModalEdit,setOpenmodalEdit] = useState(false);
     const [brandd,setBrand] = useState("");
     const [img,setImg] = useState("");
     const [name,setName] = useState("");
     const [price,setPrice] = useState("");
     const [category,setCategory] = useState("");
     const [product,setProduct] = useState({
-      brand: [{name: brandd, key: brandd }],
-      image_key : img,
-      name : name,
-      price : price,
-      categories:[category,brandd]
+    brand: [{name: brandd, key: brandd }],
+    image_key : img,
+    name : name,
+    price : price,
+    categories:[category,brandd]
     })
-  
-  const addProduct = async () => {
+
+
+    const [producttoUpdate,setProducttoUpdate] = useState({})
+
+    ///// Edit Product ///////
+    const updateProduct = async () => {
+            console.log()
+            try {
+                const res = await userRequest.put(`/products/${producttoUpdate._id}`, producttoUpdate );
+                console.log(res.data)
+                setOpenmodalEdit(false);
+
+                Swal.fire({
+                title:"Product modified successfully",
+                text: "Redirecting to Products",
+                icon: "success",
+                showCancelButton: false,
+                showConfirmButton: false,
+                timer: 1500,
+                timerProgressBar: true,
+                // didClose: 
+                //   navigate("/dashboard/products");
+                });
+            }
+        
+            catch (error) {}
+            };
+        
+
+
+    ///// Add Product ///////
+    const addProduct = async () => {
     console.log(product)
     try {
-      const res = await userRequest.post(`/products`, product);
+    const res = await userRequest.post(`/products`, product);
     console.log(res)  
     setOpenmodal(false);
-   
+
     Swal.fire({
     title: "Product added successfully",
     text: "Redirecting to Products",
@@ -47,22 +78,19 @@ function ProductsAdmin() {
     // didClose: 
     //   navigate("/dashboard/products");
     });
-    
-    
       // products.push(product);
-      }
-          
+    }
     catch (error) {}
 };
 
-    //logout
+    //////logout///////
     const logout = ()=>{
     dispatch(
     logoutuser()
     )
 };
 
-// Get Products
+/////Get Products/////
     useEffect(() =>{ 
     const getProducts = async() =>{
             try {
@@ -73,20 +101,20 @@ function ProductsAdmin() {
             getProducts()
     },[products]) 
 
-    //delete product
+    /////delete product//////
     const deleteProduct = async (id)=> {
     try {
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
-              confirmButton: 'btn btn-success',
-              cancelButton: 'btn btn-danger'
+            confirmButton: 'btn btn-success',
+            cancelButton: 'btn btn-danger'
             },
             buttonsStyling: true,
             confirmButtonColor: '#EF626A',
             cancelButtonColor: '#C6C6C6',
-          })
-          
-          swalWithBootstrapButtons.fire({
+        })
+        
+        swalWithBootstrapButtons.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
             icon: 'warning',
@@ -94,31 +122,27 @@ function ProductsAdmin() {
             confirmButtonText: 'Yes, delete it!',
             cancelButtonText: 'No, cancel!',
             reverseButtons: true
-          }).then((result) => {
+        }).then((result) => {
             if (result.isConfirmed) {
         const res = userRequest.delete(`/products/${id}`)
         products.splice(products.findIndex((item)=> item._id === id),1);
         console.log(res)
-              swalWithBootstrapButtons.fire(
+        swalWithBootstrapButtons.fire(
                 'Deleted!',
-                'Your file has been deleted.',
+                'This product has been deleted.',
                 'success'
-              )
+            )
             } else if (
               /* Read more about handling dismissals below */
-              result.dismiss === Swal.DismissReason.cancel
+            result.dismiss === Swal.DismissReason.cancel
             ) {
-              swalWithBootstrapButtons.fire(
+            swalWithBootstrapButtons.fire(
                 'Cancelled',
-                'Your imaginary file is safe :)',
+                'This product is safe :)',
                 'error'
-              )
-            }
-          })
-    
-
+            )
+            }})
     }
-    
     catch (error) {}
 };
 
@@ -263,7 +287,7 @@ function ProductsAdmin() {
                         <p className="text-color4 text-sm"> Availability: <span className="text-color1" >In Stock</span> </p>
                     </div>
                     <div className="text-color10 text-md font-semibold">{product.price} SAR</div>
-                    <Link to={`/dashboard/products/${product._id}`}  className="px-2 py-2 bg-color10 border border-color10 text-color11 font-medium rounded flex items-center gap-2 hover:bg-transparent hover:text-color10 transition"> Edit</Link>
+                    <Link to="" onClick={()=> {setOpenmodalEdit(true); setProducttoUpdate(product)}}  className="px-2 py-2 bg-color10 border border-color10 text-color11 font-medium rounded flex items-center gap-2 hover:bg-transparent hover:text-color10 transition"> Edit</Link>
                     <div onClick={() => deleteProduct(product._id)} className="text-color14  cursor-pointer hover:text-color10 ">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
@@ -325,10 +349,9 @@ function ProductsAdmin() {
 
                         <div className="flex items-center justify-start w-full">
                             <button onClick={()=> {addProduct() ; productsRef.current.scrollIntoView({
-        behavior: "smooth",
-        block: "end",
-       
-    })}} className=" text-color11  border border-color10 focus:outline-none transition duration-150 ease-in-out hover:bg-color11 hover:text-color10 bg-color10 rounded  px-8 py-2 text-sm">Add Product</button>
+                            behavior: "smooth",
+                            block: "end",
+                            })}} className=" text-color11  border border-color10 focus:outline-none transition duration-150 ease-in-out hover:bg-color11 hover:text-color10 bg-color10 rounded  px-8 py-2 text-sm">Add Product</button>
                             <button onClick={()=> setOpenmodal(false)} className="focus:outline-none ml-3 border border-color12 text-color14 transition duration-150  ease-in-out hover:text-color10  rounded px-8 py-2 text-sm">
                                 Cancel
                             </button>
@@ -340,6 +363,63 @@ function ProductsAdmin() {
             
         </div >
 }
+            {openModalEdit &&
+            <div className="" >
+            <div className=" overflow-x-hidden overflow-y-auto outline-none py-32  bg-color6 bg-opacity-40  transition duration-150 fixed  inset-0 z-50 " id="modal">
+                <div role="alert" className="container mx-auto   w-11/12 md:w-2/3 max-w-lg">
+                    <div className=" py-8 px-5 md:px-10 bg-color11 shadow-md rounded border border-color14">
+                        <div className="w-full flex justify-between text-color1 mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-24 w-24 " fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z" />
+                        </svg>
+                            <svg onClick={()=> setOpenmodalEdit(false)}  xmlns="http://www.w3.org/2000/svg"  aria-label="Close" className="icon icon-tabler icon-tabler-x cursor-pointer text-color14" width={20} height={20} viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" />
+                                <line x1={18} y1={6} x2={6} y2={18} />
+                                <line x1={6} y1={6} x2={18} y2={18} />
+                            </svg>
+                
+                        </div>
+                        <h1 className="text-color3 font-lg font-bold tracking-normal leading-tight mb-4">Update Product Details</h1>
+                        <label  className="text-color3 text-sm font-bold leading-tight tracking-normal">
+                            Product Name
+                        </label>
+                        <input defaultValue={producttoUpdate.name} onChange={(e)=>{producttoUpdate.name = e.target.value; setProducttoUpdate({...producttoUpdate})}} className="mb-5 mt-2 text-color5 focus:outline-none focus:border focus:border-color10 font-normal w-full h-10 flex items-center pl-3 text-sm border-color14 rounded border" placeholder="NYX | Suede Matte Lipstick ...." />
+                        <label  className="text-color3 text-sm font-bold leading-tight tracking-normal">
+                            Product Brand
+                        </label>
+                        <input defaultValue={producttoUpdate.brand[0].name} onChange={(e)=>{producttoUpdate.brand = [{name:e.target.value,key:e.target.value}]; producttoUpdate.categories[1] = e.target.value; setProducttoUpdate({...producttoUpdate})}}
+                        type="text" className="mb-5 mt-2 text-color5 focus:outline-none focus:border focus:border-color10 font-normal w-full h-10 flex items-center pl-3 text-sm border-color14 rounded border" placeholder="Brand Name" />
+
+                        <label  className="text-color3 text-sm font-bold leading-tight tracking-normal">
+                            Product Category
+                        </label>
+                        <input defaultValue={producttoUpdate.categories[0]} onChange={(e)=>{producttoUpdate.categories[0] = e.target.value; setProducttoUpdate({...producttoUpdate})}} className="mb-5 mt-2 text-color5 focus:outline-none focus:border focus:border-color10 font-normal w-full h-10 flex items-center pl-3 text-sm border-color14 rounded border" 
+                        placeholder="(eye, face, lip)" />
+                        <label className="text-color3 text-sm font-bold leading-tight tracking-normal">
+                            Product Price
+                        </label>
+                        <input defaultValue={producttoUpdate.price} onChange={(e)=>{producttoUpdate.price = e.target.value; setProducttoUpdate({...producttoUpdate})}} 
+                        className="mb-5 mt-2 text-color5 focus:outline-none focus:border focus:border-color10 font-normal w-full h-10 flex items-center pl-3 text-sm border-color14 rounded border" 
+                        placeholder="price" />
+                        <label  className="text-color3 text-sm font-bold leading-tight tracking-normal">
+                            Product Image URL
+                        </label>
+                        <input defaultValue={producttoUpdate.image_key}
+                        onChange={(e)=>{producttoUpdate.image_key = e.target.value; setProducttoUpdate({...producttoUpdate})}} className="mb-5 mt-2 text-color5 focus:outline-none focus:border focus:border-color10 font-normal w-full h-10 flex items-center pl-3 text-sm border-color14 rounded border"
+                        placeholder="https://image.com/...." />
+
+                        <div className="flex items-center justify-start w-full">
+                            <button onClick={()=> updateProduct() } className=" text-color11  border border-color10 focus:outline-none transition duration-150 ease-in-out hover:bg-color11 hover:text-color10 bg-color10 rounded  px-8 py-2 text-sm">Update Product</button>
+                            <button onClick={()=> setOpenmodalEdit(false)} className="focus:outline-none ml-3 border border-color12 text-color14 transition duration-150  ease-in-out hover:text-color10  rounded px-8 py-2 text-sm">
+                                Cancel
+                            </button>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            
+        </div >}
 
         
         </div>
