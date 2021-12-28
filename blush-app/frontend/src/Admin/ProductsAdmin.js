@@ -1,4 +1,4 @@
-import { useState, useEffect} from "react";
+import { useState, useEffect,createRef} from "react";
 import {Link} from "react-router-dom";
 import {useSelector,useDispatch} from "react-redux"
 import { logoutuser } from '../redux/userRedux';
@@ -9,6 +9,8 @@ import {userRequest} from './requestMethode';
 import Swal from "sweetalert2";
 
 function ProductsAdmin() {
+    const productsRef = createRef(null);
+
     const user = useSelector((state) => state.user.currentUser);
     const [products,setProducts] = useState([]);
     const navigate = useNavigate();
@@ -33,19 +35,20 @@ function ProductsAdmin() {
       const res = await userRequest.post(`/products`, product);
     console.log(res)  
     setOpenmodal(false);
+   
     Swal.fire({
-      title: "Product added successfully",
-      text: "Redirecting to Products",
-      icon: "success",
-      showCancelButton: false,
-      showConfirmButton: false,
-      timer: 2000,
-      timerProgressBar: true,
-    //   didClose: () => {
+    title: "Product added successfully",
+    text: "Redirecting to Products",
+    icon: "success",
+    showCancelButton: false,
+    showConfirmButton: false,
+    timer: 1500,
+    timerProgressBar: true,
+    // didClose: 
     //   navigate("/dashboard/products");
-    //   },
     });
-  
+    
+    
       // products.push(product);
       }
           
@@ -73,9 +76,47 @@ function ProductsAdmin() {
     //delete product
     const deleteProduct = async (id)=> {
     try {
-    const res = await userRequest.delete(`/products/${id}`)
-    products.splice(products.findIndex((item)=> item._id === id),1);
-    console.log(res)
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+              confirmButton: 'btn btn-success',
+              cancelButton: 'btn btn-danger'
+            },
+            buttonsStyling: true,
+            confirmButtonColor: '#EF626A',
+            cancelButtonColor: '#C6C6C6',
+          })
+          
+          swalWithBootstrapButtons.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, cancel!',
+            reverseButtons: true
+          }).then((result) => {
+            if (result.isConfirmed) {
+        const res = userRequest.delete(`/products/${id}`)
+        products.splice(products.findIndex((item)=> item._id === id),1);
+        console.log(res)
+              swalWithBootstrapButtons.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+              )
+            } else if (
+              /* Read more about handling dismissals below */
+              result.dismiss === Swal.DismissReason.cancel
+            ) {
+              swalWithBootstrapButtons.fire(
+                'Cancelled',
+                'Your imaginary file is safe :)',
+                'error'
+              )
+            }
+          })
+    
+
     }
     
     catch (error) {}
@@ -85,8 +126,8 @@ function ProductsAdmin() {
 
 
     return (
-<div>
-        <div className="container grid grid-cols-12 items-start gap-6 pt-4 pb-16">
+<div >
+        <div ref={productsRef} className="container grid grid-cols-12 items-start gap-6 pt-4 pb-16">
         {user ?
             <>
         {/* sidebar */}
@@ -205,7 +246,7 @@ function ProductsAdmin() {
                 </div>
             {/* sidebarend */}
             {/* sidebarend */}
-                <div className="col-span-9 space-y-4">
+                <div   className="col-span-9 space-y-4">
                 <Link to="" onClick={()=>setOpenmodal(true)} className=" flex gap-2 ml-auto w-44 justify-center px-2 py-2  bg-color10 border border-color10 text-color11 font-medium rounded  hover:bg-transparent hover:text-color10 transition"> Add New product</Link>
 
                 {/* single product */}
@@ -261,13 +302,13 @@ function ProductsAdmin() {
                         <label  className="text-color3 text-sm font-bold leading-tight tracking-normal">
                             Product Brand
                         </label>
-                        <input defaultValue={brandd} onChange={(e)=>{product.brand = [{name:e.target.value,key:e.target.value}]; setProduct({...product})}}
+                        <input defaultValue={brandd} onChange={(e)=>{product.brand = [{name:e.target.value,key:e.target.value}]; product.categories[1] = e.target.value; setProduct({...product})}}
                         type="text" className="mb-5 mt-2 text-color5 focus:outline-none focus:border focus:border-color10 font-normal w-full h-10 flex items-center pl-3 text-sm border-color14 rounded border" placeholder="Brand Name" />
 
                         <label  className="text-color3 text-sm font-bold leading-tight tracking-normal">
                             Product Category
                         </label>
-                        <input defaultValue={category} onChange={(e)=>{product.categories = [e.target.value,category,product.brand]; setProduct({...product})}} className="mb-5 mt-2 text-color5 focus:outline-none focus:border focus:border-color10 font-normal w-full h-10 flex items-center pl-3 text-sm border-color14 rounded border" 
+                        <input defaultValue={category} onChange={(e)=>{product.categories[0] = e.target.value; setProduct({...product})}} className="mb-5 mt-2 text-color5 focus:outline-none focus:border focus:border-color10 font-normal w-full h-10 flex items-center pl-3 text-sm border-color14 rounded border" 
                         placeholder="(eye, face, lip)" />
                         <label className="text-color3 text-sm font-bold leading-tight tracking-normal">
                             Product Price
@@ -283,7 +324,11 @@ function ProductsAdmin() {
                         placeholder="https://image.com/...." />
 
                         <div className="flex items-center justify-start w-full">
-                            <button onClick={()=> addProduct()} className=" text-color11  border border-color10 focus:outline-none transition duration-150 ease-in-out hover:bg-color11 hover:text-color10 bg-color10 rounded  px-8 py-2 text-sm">Add Product</button>
+                            <button onClick={()=> {addProduct() ; productsRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "end",
+       
+    })}} className=" text-color11  border border-color10 focus:outline-none transition duration-150 ease-in-out hover:bg-color11 hover:text-color10 bg-color10 rounded  px-8 py-2 text-sm">Add Product</button>
                             <button onClick={()=> setOpenmodal(false)} className="focus:outline-none ml-3 border border-color12 text-color14 transition duration-150  ease-in-out hover:text-color10  rounded px-8 py-2 text-sm">
                                 Cancel
                             </button>
@@ -293,7 +338,7 @@ function ProductsAdmin() {
                 </div>
             </div>
             
-        </div>
+        </div >
 }
 
         
