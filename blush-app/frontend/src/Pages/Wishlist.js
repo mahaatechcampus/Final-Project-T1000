@@ -50,7 +50,7 @@ const handleAddToCart = (product)=>{
                 reverseButtons: true
             }).then((result) => {
                 if (result.isConfirmed) {
-                    dispatch(removeProduct(id))
+                    dispatch(removeProduct(id));
             // console.log(wishlist.products.findIndex((item)=> item._id === id))
             //  wishlist.products.splice(wishlist.products.findIndex((item)=> item._id === id),1);
             swalWithBootstrapButtons.fire(

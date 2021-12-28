@@ -22,15 +22,17 @@ const cartSlice = createSlice({
         total:0, 
     },
     reducers:{
-        addProduct:(initialState,action)=>{
-            initialState.quantity += 1;
+        addProduct:(initialState,action)=>{ 
+            initialState.quantity += 1;  
             initialState.products.push(action.payload);
             initialState.total += action.payload.price * action.payload.quantity;
+        
             Toast.fire({
                 icon: "success",
                 title: "Added to Cart Successfully",
               });
         },
+
         cartEmptyifPayed:(initialState) =>{
             initialState.products = [];
             initialState.quantity = 0; // inside cart

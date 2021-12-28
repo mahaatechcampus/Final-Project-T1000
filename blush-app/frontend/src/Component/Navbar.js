@@ -9,8 +9,8 @@ function Navbar() {
 
 const [searchTerm, setSearchTerm] = useState("");
 const quantity =  useSelector(state => state.cart.quantity)
+const wishlist = useSelector((state) => state.wishlist.products);
 const quantitywish =  useSelector(state => state.wishlist.quantity)
-
 const user = useSelector((state) => state.user.currentUser);
 const navigate = useNavigate();
 
@@ -50,7 +50,7 @@ const navigate = useNavigate();
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                         </svg></div>
                         <div className="text-xs leading-3">Wishlist</div>
-                        <span className=" absolute right-0 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-color10 text-color11 text-xs">{user?quantitywish : 0}</span>
+                        <span className=" absolute right-0 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-color10 text-color11 text-xs">{user? wishlist.length :  0}</span>
                     </Link>
 
                     <Link to="/cart" className="text-center text-color14 hover:text-color1 transition relative">
@@ -60,7 +60,7 @@ const navigate = useNavigate();
                     </svg></div>
 
                     <div className="text-xs leading-3">Cart</div>
-                    <span className=" absolute right-0 left-6 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-color10 text-color11 text-xs">{user?quantity: 0}</span>
+                    <span className=" absolute right-0 left-6 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-color10 text-color11 text-xs">{user?quantity: 0 }</span>
                     </Link>
 
                 { user ? ( <UserDropdown />)

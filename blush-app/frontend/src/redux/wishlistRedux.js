@@ -17,7 +17,7 @@ const Toast = MySwal.mixin({
 const wishlistSlice = createSlice({
     name : "wishlist",
     initialState :{
-        products: [],
+        products: [{}],
         quantity:0,
     },
     reducers:{
@@ -30,7 +30,10 @@ const wishlistSlice = createSlice({
             });
         },
         removeProduct:(initialState,action)=>{
-            initialState.products.splice(initialState.products.findIndex((item)=> item._id === action.id),1);
+            initialState.quantity -= 1;
+            console.log(action.payload)
+            console.log(initialState.products.findIndex((item)=> item._id === action.payload))
+            initialState.products.splice(initialState.products.findIndex((item)=> item._id === action.payload),1);
         },
     
         wishlistEmpty:(initialState) =>{
