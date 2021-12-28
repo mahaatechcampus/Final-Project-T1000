@@ -3,7 +3,9 @@ import {Link} from "react-router-dom";
 import {useSelector,useDispatch} from "react-redux"
 import { logoutuser } from '../redux/userRedux';
 import {addProduct} from "../redux/cartRedux";
+import { removeProduct } from "../redux/wishlistRedux";
 import { useNavigate } from 'react-router';
+import Swal from "sweetalert2";
 
 function Wishlist() {
     const user = useSelector((state) => state.user.currentUser);
@@ -23,6 +25,53 @@ const handleAddToCart = (product)=>{
     addProduct({...product, price:product.price})
         ) 
     };
+
+    /////delete product//////
+    const deleteProduct = (id)=> {
+        console.log(wishlist.products)
+        try {
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger'
+                },
+                buttonsStyling: true,
+                confirmButtonColor: '#EF626A',
+                cancelButtonColor: '#C6C6C6',
+            })
+            
+            swalWithBootstrapButtons.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'No, cancel!',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    dispatch(removeProduct(id))
+            // console.log(wishlist.products.findIndex((item)=> item._id === id))
+            //  wishlist.products.splice(wishlist.products.findIndex((item)=> item._id === id),1);
+            swalWithBootstrapButtons.fire(
+                    'Deleted!',
+                    'This product has been deleted.',
+                    'success'
+                )
+                } else if (
+                  /* Read more about handling dismissals below */
+                result.dismiss === Swal.DismissReason.cancel
+                ) {
+                swalWithBootstrapButtons.fire(
+                    'Cancelled',
+                    'This product is safe :)',
+                    'error'
+                )
+                }})
+        }
+        catch (error) {}
+    };
+    
 
     return (
         <div> 
@@ -125,7 +174,7 @@ const handleAddToCart = (product)=>{
                     </div>
                     <div className="text-color10 text-md font-semibold">{product.price} SAR</div>
                     <Link to="" onClick={()=> handleAddToCart(product)} className="px-4 py-2 bg-color10 border border-color10 text-color11 font-medium rounded flex items-center gap-2 hover:bg-transparent hover:text-color10 transition"> Add To Cart</Link>
-                    <div className="text-color14  cursor-pointer hover:text-color10 ">
+                    <div onClick={() => deleteProduct(product._id)} className="text-color14  cursor-pointer hover:text-color10 ">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
                     </svg>

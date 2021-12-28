@@ -29,6 +29,9 @@ const wishlistSlice = createSlice({
                 title: "Added to Wishlist Successfully",
             });
         },
+        removeProduct:(initialState,action)=>{
+            initialState.products.splice(initialState.products.findIndex((item)=> item._id === action.id),1);
+        },
     
         wishlistEmpty:(initialState) =>{
             initialState.products = [];
@@ -37,5 +40,5 @@ const wishlistSlice = createSlice({
 },
 });
 
-export const { addProductWish,wishlistEmpty } = wishlistSlice.actions;
+export const { addProductWish,wishlistEmpty, removeProduct } = wishlistSlice.actions;
 export default wishlistSlice.reducer;
